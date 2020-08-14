@@ -11,11 +11,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-int main(int argc, const char * argv[]) {
-    std::cout << "Hello, World!\n";
-    return 0;
-}
-
 const GLint WIDTH = 800, HEIGHT = 600;
 
 int main() {
