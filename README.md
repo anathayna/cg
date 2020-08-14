@@ -1,2 +1,2 @@
 # cg
-computer graphics studies :computer::space_invader:
+computer graphics studies :computer::art:
