@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		360AE2B024E62D3F00B3AA56 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 360AE2AF24E62D3F00B3AA56 /* main.cpp */; };
-		360AE2B924E6301F00B3AA56 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360AE2B824E6301F00B3AA56 /* OpenGL.framework */; };
-		360AE2BB24E6307000B3AA56 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 360AE2BA24E6307000B3AA56 /* libGLEW.2.1.0.dylib */; };
-		360AE2BD24E6308B00B3AA56 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 360AE2BC24E6308B00B3AA56 /* libglfw.3.3.dylib */; };
+		3639E53424EF325800F656C3 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3639E53324EF325800F656C3 /* GLUT.framework */; };
+		366F9E5A24EA7F9B00B72639 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 366F9E5924EA7F9B00B72639 /* OpenGL.framework */; };
+		366F9E5C24EA7FC300B72639 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 366F9E5B24EA7FC200B72639 /* libGLEW.2.1.0.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
+		366F9E5E24EA7FF100B72639 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 366F9E5D24EA7FF100B72639 /* libglfw.3.3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,10 +30,10 @@
 /* Begin PBXFileReference section */
 		360AE2AC24E62D3F00B3AA56 /* splash */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = splash; sourceTree = BUILT_PRODUCTS_DIR; };
 		360AE2AF24E62D3F00B3AA56 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		360AE2B624E62D5300B3AA56 /* splash.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = splash.entitlements; sourceTree = "<group>"; };
-		360AE2B824E6301F00B3AA56 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		360AE2BA24E6307000B3AA56 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../../usr/local/Cellar/glew/2.1.0_1/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
-		360AE2BC24E6308B00B3AA56 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../usr/local/Cellar/glfw/3.3.2/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
+		3639E53324EF325800F656C3 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		366F9E5924EA7F9B00B72639 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		366F9E5B24EA7FC200B72639 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../../../../usr/local/Cellar/glew/2.1.0_1/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
+		366F9E5D24EA7FF100B72639 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../../../usr/local/Cellar/glfw/3.3.2/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,9 +41,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				360AE2BD24E6308B00B3AA56 /* libglfw.3.3.dylib in Frameworks */,
-				360AE2BB24E6307000B3AA56 /* libGLEW.2.1.0.dylib in Frameworks */,
-				360AE2B924E6301F00B3AA56 /* OpenGL.framework in Frameworks */,
+				3639E53424EF325800F656C3 /* GLUT.framework in Frameworks */,
+				366F9E5C24EA7FC300B72639 /* libGLEW.2.1.0.dylib in Frameworks */,
+				366F9E5E24EA7FF100B72639 /* libglfw.3.3.dylib in Frameworks */,
+				366F9E5A24EA7F9B00B72639 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,7 +71,6 @@
 		360AE2AE24E62D3F00B3AA56 /* splash */ = {
 			isa = PBXGroup;
 			children = (
-				360AE2B624E62D5300B3AA56 /* splash.entitlements */,
 				360AE2AF24E62D3F00B3AA56 /* main.cpp */,
 			);
 			path = splash;
@@ -78,9 +79,10 @@
 		360AE2B724E6301E00B3AA56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				360AE2BC24E6308B00B3AA56 /* libglfw.3.3.dylib */,
-				360AE2BA24E6307000B3AA56 /* libGLEW.2.1.0.dylib */,
-				360AE2B824E6301F00B3AA56 /* OpenGL.framework */,
+				3639E53324EF325800F656C3 /* GLUT.framework */,
+				366F9E5D24EA7FF100B72639 /* libglfw.3.3.dylib */,
+				366F9E5B24EA7FC200B72639 /* libGLEW.2.1.0.dylib */,
+				366F9E5924EA7F9B00B72639 /* OpenGL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,6 +201,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /urs/local/include/;
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -251,6 +255,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /urs/local/include/;
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -261,15 +267,19 @@
 		360AE2B424E62D3F00B3AA56 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = splash/splash.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				COPY_HEADERS_RUN_UNIFDEF = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
-				HEADER_SEARCH_PATHS = /urs/local/include;
+				HEADER_SEARCH_PATHS = /urs/local/include/;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/glfw-3.3.2.bin.MACOS/lib-macos",
 					/usr/local/Cellar/glew/2.1.0_1/lib,
 					/usr/local/Cellar/glfw/3.3.2/lib,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -277,15 +287,19 @@
 		360AE2B524E62D3F00B3AA56 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = splash/splash.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				COPY_HEADERS_RUN_UNIFDEF = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
-				HEADER_SEARCH_PATHS = /urs/local/include;
+				HEADER_SEARCH_PATHS = /urs/local/include/;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/glfw-3.3.2.bin.MACOS/lib-macos",
 					/usr/local/Cellar/glew/2.1.0_1/lib,
 					/usr/local/Cellar/glfw/3.3.2/lib,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
