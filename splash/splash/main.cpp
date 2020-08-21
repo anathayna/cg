@@ -2,11 +2,11 @@
 //  main.cpp
 //  splash
 //
-//  Created by Ana Thayna Franca on 13/08/20.
+//  Created by Ana Thayna Franca on 20/08/20.
 //  Copyright © 2020 Ana Thayna Franca. All rights reserved.
 //
 
-#include <iostream>
+#include <stdio.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -16,7 +16,7 @@ int main() {
 
     //INICIALIZAR O GLFW
     if (!glfwInit()) {
-        printf("GLFW Não foi inicializado");
+        printf("GLFW não foi inicializado");
         glfwTerminate();
         return 1;
     };
