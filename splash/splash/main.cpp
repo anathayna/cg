@@ -20,7 +20,7 @@ static const char* vShader = "                   \n\
 layout(location=0) in vec3 pos;                  \n\
                                                  \n\
 void main(){                                     \n\
-  gl_Position =  vec4(0.4*pos.x, 0.4*pos.y, pos.z, 1.0); \n\
+  gl_Position =  vec4(pos.x, pos.y, pos.z, 1.0); \n\
 }                                                \n\
 ";
 
