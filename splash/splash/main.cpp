@@ -65,7 +65,40 @@ void CreateTriangle() {
     glBindVertexArray(0); //remove o VAO da memÛria
 }
 
+void AddShader(GLenum shaderType, char* shaderCode) {
+    //começando a compilar cada shader
+    //1. criar um shader
+    GLuint shader = glCreateShader(shaderType);
+    const GLchar* code[1];
+    code[0] = shaderCode;
+
+    //2. atribui o code do GLSL p/ o shader
+    //2.1 guarda e converte a variável char em GLchar
+    GLint codeLenght[1];
+    codeLenght[0] = shaderCode;
+
+    //2.2 anexa o code ao shader
+    glShaderSource(shader, 1, code, NULL); //1. número de códigos que estão sendo enviados | NULL: final da string, termina code
+    
+    //3. compila o shader
+    glCompileShader(shader);
+    
+    //4. tratamentos de erros de compilação
+    GLint result = 0;
+    glGetShaderiv(shader , GL_COMPILE_STATUS, &result); //coloca o valor do status da compilação na variável result
+    if(!result) {
+        GLchar log[1024] = { 0 };
+        glGetProgramInfoLog(shader, sizeof(log), NULL, log); //busca texto caso ocorra algum erro na compilação
+        printf("erro ao compilar %d shader '%s'", shaderType, log);
+        return;
+    }
+    
+    //5. anexa o shader ao programa
+    glAttachShader(program, shader); //variável global
+}
+
 void CompileShader() {
+    //1. criar programa
     pShader = glCreateProgram(); //Inicia o programa
     if (!pShader) {
         printf("Erro ao criar o programa");
