@@ -36,10 +36,10 @@ void main(){                                     \n\
 
 void CreateTriangle() {
     GLfloat vertices[] = {
-        //X      Y     Z
-        -1.0f, -1.0f, 0.0f,
-        1.0f, -1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f
+        //X      Y     
+        -1.0f, -1.0f,
+        1.0f, -1.0f,
+        0.0f, 1.0f
     };
 
     //VAO
