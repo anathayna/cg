@@ -69,14 +69,12 @@ void AddShader(GLenum shaderType, const char* shaderCode) {
     //começando a compilar cada shader
     //1. criar um shader
     GLuint shader = glCreateShader(shaderType);
+    
     const GLchar* code[1];
     code[0] = shaderCode;
 
     //2. atribui o code do GLSL p/ o shader
     //2.1 guarda e converte a variável char em GLchar
-    GLint codeLenght[1];
-    codeLenght[0] = shaderCode;
-
     //2.2 anexa o code ao shader
     glShaderSource(shader, 1, code, NULL); //1. número de códigos que estão sendo enviados | NULL: final da string, termina code
     
@@ -125,10 +123,10 @@ void CompileShader() {
     
     //6. validação do programa
     glValidateProgram(pShader);
-    glGetProgramiv(shader , GL_VALIDATEpShaderS, &result); //coloca o valor do status da compilação na variável result
+    glGetProgramiv(pShader , GL_VALIDATE_STATUS, &result); //coloca o valor do status da compilação na variável result
     if(!result) {
         GLchar log[1024] = { 0 };
-        glGetProgramInfoLog(shader, sizeof(log),pShader log); //busca texto caso ocorra algum erro na compilação
+        glGetProgramInfoLog(pShader, sizeof(log), NULL, log); //busca texto caso ocorra algum erro na compilação
         printf("erro ao validar o programa: '%s'\n", log);
         return;
     }
