@@ -17,10 +17,10 @@ GLuint VAO, VBO, pShader;
 static const char* vShader = "                   \n\
 #version 330                                     \n\
                                                  \n\
-layout(location=0) in vec3 pos;                  \n\
+layout(location=0) in vec2 pos;                  \n\
                                                  \n\
 void main(){                                     \n\
-  gl_Position =  vec4(pos.x, pos.y, pos.z, 1.0); \n\
+  gl_Position =  vec4(pos.x, pos.y, 0.0, 1.0);   \n\
 }                                                \n\
 ";
 
@@ -36,22 +36,27 @@ void main(){                                     \n\
 
 void CreateTriangle() {
     GLfloat vertices[] = {
-        //X      Y     
-        -1.0f, -1.0f,
-        1.0f, -1.0f,
-        0.0f, 1.0f
+    //    X       Y
+        -1.0f,  -1.0f,  //vértice 1 (x,y)
+         1.0f,  -1.0f,  //vértice 1 (x,y)
+         0.0f,   1.0f   //vértice 1 (x,y)
     };
 
     //VAO
     glGenVertexArrays(1, &VAO); //Gera um VAO ID
     glBindVertexArray(VAO); //Atribui o ID ao VAO
 
-        //VBO
+        //Carrega os dados do vértice para a memória da placa de vídeo
+        //Vertex Buffer Object: VBO
         glGenBuffers(1, &VBO); //Gera um VBO ID
         glBindBuffer(GL_ARRAY_BUFFER, VBO); //Atribui o ID ao VBO
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //Atribuindo os valores do vertice para o VBO
+    
+                    //GL_STATIC_DRAW: Utilizado com desenhos que são fixos
+                    //GL_DINAMIC_DRAW: Utilizado com desenhos que podem ter alterações durante a apresentação
+                    //GL_STREAM_DRAW: Desenho utilizado somente 1 frame
 
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0); //0:  shader location | 3: numero de valores de vertice (x,y,z)
+            glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0); //0:  shader location | 3: numero de valores de vertice (x,y,z)
                                                                    //GL_FLOAT: Tipo de dados | GL_FALSE: normalizado | 0: pular elemento (cor)
                                                                    //0: offset
             glEnableVertexAttribArray(0); //0:  shader location
