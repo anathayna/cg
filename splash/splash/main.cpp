@@ -7,6 +7,7 @@
 //
 
 #include <time.h>
+#include <math.h>
 #include <chrono>
 #include <stdio.h>
 #include <iostream>
@@ -198,14 +199,14 @@ int main() {
         glUseProgram(pShader); //usar o programa da memória
             glBindVertexArray(VAO); //deixa na memória os links p/ serem utilizados
         
-        auto t_now = std::chrono::high_resolution_clock::now();
-        float time = std::chrono::duration_cast<std::chrono::duration<float>>(t_now - t_start).count();
+                auto t_now = std::chrono::high_resolution_clock::now();
+                float time = std::chrono::duration_cast<std::chrono::duration<float>>(t_now - t_start).count();
         
                 GLint uniColor = glGetUniformLocation(pShader, "triangleColor"); //procura a entrada chamada triangle color
         
-        float r = (sin(time * 4.0f) + 1.0f) / 2.0f;
-                float g = (float)rand()/RAND_MAX;
-                float b = (float)rand()/RAND_MAX;
+                float r = (sin(time * 4.0f) + 1.0f) / 2.0f;
+                float g = 0.0f;
+                float b = 0.0f;
         
                 glUniform3f(uniColor, r, g, b);
         
