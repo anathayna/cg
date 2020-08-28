@@ -27,10 +27,12 @@ void main(){                                     \n\
 static const char* fShader = "                   \n\
 #version 330                                     \n\
                                                  \n\
+uniform vec3 triangleColor;                      \n\
+                                                 \n\
 out vec4 color;                                  \n\
                                                  \n\
 void main(){                                     \n\
-  color =  vec4(1.0, 0.0, 0.0, 1.0);             \n\
+  color =  vec4(triangleColor, 1.0);             \n\
 }                                                \n\
 ";
 
@@ -150,7 +152,7 @@ int main() {
     //Forward Functions
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "Nova Janela", NULL, NULL);
+    GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "janelinha show", NULL, NULL);
     if (!mainWindow) {
         printf("GLWF nao criou a janela");
         glfwTerminate();
@@ -191,6 +193,10 @@ int main() {
         //Desenhar o triangulo
         glUseProgram(pShader); //usar o programa da memória
             glBindVertexArray(VAO); //deixa na memória os links p/ serem utilizados
+                GLint uniColor = glGetUniformLocation(pShader, "triangleColor"); //procura a entrada chamada triangle color
+        
+                glUniform3f(uniColor, 1.0f, 0.0f, 0.0f);
+        
                 glDrawArrays(GL_TRIANGLES, 0, 3); //desenha na tela, GL_TRIANGLES | 0: primeira posição | 3: qtd de vértices (-1-1, 1-1, 0,1)
             glBindVertexArray(0); //removo VAO da memória
         glUseProgram(0); //removo o programa da memória
