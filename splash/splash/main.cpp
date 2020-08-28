@@ -177,8 +177,8 @@ int main() {
     glViewport(0, 0, bufferWidth, bufferHeight);
 
     //Criar o Triangulo
-    CreateTriangle();
-    CompileShader();
+    CreateTriangle(); //coloca os dados na memória da placa de vídeo
+    CompileShader(); //compila shaders
 
     while (!glfwWindowShouldClose(mainWindow)) {
         //Ativa inputs e eventos
@@ -189,11 +189,11 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         //Desenhar o triangulo
-        glUseProgram(pShader);
-            glBindVertexArray(VAO);
-                glDrawArrays(GL_TRIANGLES, 0, 3);
-            glBindVertexArray(0);
-        glUseProgram(0);
+        glUseProgram(pShader); //usar o programa da memória
+            glBindVertexArray(VAO); //deixa na memória os links p/ serem utilizados
+                glDrawArrays(GL_TRIANGLES, 0, 3); //desenha na tela, GL_TRIANGLES | 0: primeira posição | 3: qtd de vértices (-1-1, 1-1, 0,1)
+            glBindVertexArray(0); //removo VAO da memória
+        glUseProgram(0); //removo o programa da memória
 
         glfwSwapBuffers(mainWindow);
     }
