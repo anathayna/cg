@@ -6,6 +6,8 @@
 //  Copyright © 2020 Ana Thayna Franca. All rights reserved.
 //
 
+#include <time.h>
+#include <chrono>
 #include <stdio.h>
 #include <iostream>
 #include <GL/glew.h>
@@ -159,11 +161,11 @@ int main() {
         return 1;
     }
 
-    //Pegar o buffer size da largura e altura
+    //pegar o buffer size da largura e altura
     int bufferWidth, bufferHeight;
     glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
 
-    //Configurando a janela principal
+    //configurando a janela principal
     glfwMakeContextCurrent(mainWindow);
 
     //GLEW
@@ -175,27 +177,37 @@ int main() {
         return 1;
     };
 
-    //Configurando viewport
+    //configurando viewport
     glViewport(0, 0, bufferWidth, bufferHeight);
 
-    //Criar o Triangulo
+    //cria o Triangulo
     CreateTriangle(); //coloca os dados na memória da placa de vídeo
     CompileShader(); //compila shaders
+    
+    auto t_start = std::chrono::high_resolution_clock::now();
 
     while (!glfwWindowShouldClose(mainWindow)) {
-        //Ativa inputs e eventos
+        //ativa inputs e eventos
         glfwPollEvents();
 
-        //Limpa a janela, cor
+        //limpa a janela, cor
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        //Desenhar o triangulo
+        //desenhar o triangulo
         glUseProgram(pShader); //usar o programa da memória
             glBindVertexArray(VAO); //deixa na memória os links p/ serem utilizados
+        
+        auto t_now = std::chrono::high_resolution_clock::now();
+        float time = std::chrono::duration_cast<std::chrono::duration<float>>(t_now - t_start).count();
+        
                 GLint uniColor = glGetUniformLocation(pShader, "triangleColor"); //procura a entrada chamada triangle color
         
-                glUniform3f(uniColor, 1.0f, 0.0f, 0.0f);
+        float r = (sin(time * 4.0f) + 1.0f) / 2.0f;
+                float g = (float)rand()/RAND_MAX;
+                float b = (float)rand()/RAND_MAX;
+        
+                glUniform3f(uniColor, r, g, b);
         
                 glDrawArrays(GL_TRIANGLES, 0, 3); //desenha na tela, GL_TRIANGLES | 0: primeira posição | 3: qtd de vértices (-1-1, 1-1, 0,1)
             glBindVertexArray(0); //removo VAO da memória
