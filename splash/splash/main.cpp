@@ -22,8 +22,8 @@
 const GLint WIDTH = 800, HEIGHT = 600;
 GLuint VAO, VBO, pShader;
 
-//Variaveis globais
-bool direction = true, sizeDirection = true, angleDirection = true; //se for true andar para a direita se for false andar para a esquerda
+// variaveis globais
+bool direction = true, sizeDirection = true, angleDirection = true; // se for true andar para a direita se for false andar para a esquerda
 float triOffset = 0.0f, triOffsetMax = 0.7f, triIncrement = 0.005f;
 float size = 0.4f, maxSize = 0.8f, minSize = 0.1f, sizeIncrement = 0.005f;
 float angle = 0.0, maxAngle = 360.0f, minAngle = 0.0f, angleIncrement = 0.1f;
@@ -54,97 +54,97 @@ void main(){                                     \n\
 
 void CreateTriangle() {
     GLfloat vertices[] = {
-        -1.0f, -1.0f, 0.0f, //VÈrtice 1 (x,y,z)
-        1.0f, -1.0f, 0.0f, //VÈrtice 2 (x,y,z)
-        0.0f, 1.0f, 0.0f   //VÈrtice 3 (x,y,z)
+        -1.0f, -1.0f, 0.0f, // vertice 1 (x,y,z)
+        1.0f, -1.0f, 0.0f, // vertice 2 (x,y,z)
+        0.0f, 1.0f, 0.0f   // vertice 3 (x,y,z)
     };
 
-    //Vertex Array Object: VAO
-    glGenVertexArrays(1, &VAO); //Gera um VAO ID
-    glBindVertexArray(VAO); //Atribui o ID ao VAO
+    // Vertex Array Object: VAO
+    glGenVertexArrays(1, &VAO); // gera um VAO ID
+    glBindVertexArray(VAO); // atribui o ID ao VAO
 
-        //Carrega os dados do vÈrtice para a memÛria da placa de vÌdeo
-        //Vertex Buffer Object: VBO
-        glGenBuffers(1, &VBO); //Gera um VBO ID
-        glBindBuffer(GL_ARRAY_BUFFER, VBO); //Atribui o ID ao VBO
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //Atribuindo os valores do vertice para o VBO
-                //GL_STATIC_DRAW: Utilizado com desenhos que s„o fixos
-                //GL_DYNAMIC_DRAW: Utilizado com desenhos que podem ter alteraÁıes durtante a apresentaÁ„o
-                //GL_STREAM_DRAW: Desenho È utilizado somente 1 frame
+        // carrega os dados do vertice para a memoria da placa de video
+        // Vertex Buffer Object: VBO
+        glGenBuffers(1, &VBO); // gera um VBO ID
+        glBindBuffer(GL_ARRAY_BUFFER, VBO); // atribui o ID ao VBO
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // atribuindo os valores do vertice para o VBO
+                //GL_STATIC_DRAW: utilizado com desenhos que sao fixos
+                //GL_DYNAMIC_DRAW: utilizado com desenhos que podem ter alteracoes durtante a apresentacao
+                //GL_STREAM_DRAW: desenho utilizado somente 1 frame
 
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0); //0:  shader location | 3: numero de valores de vertice (x,y,z)
                                                                    //GL_FLOAT: Tipo de dados | GL_FALSE: normalizado | 0: pular elemento (cor)
                                                                    //0: offset
             glEnableVertexAttribArray(0); //0: shader location
 
-        glBindBuffer(GL_ARRAY_BUFFER, 0); //remove o VBO da memÛria
-    glBindVertexArray(0); //remove o VAO da memÛria
+        glBindBuffer(GL_ARRAY_BUFFER, 0); // remove o VBO da memoria
+    glBindVertexArray(0); // remove o VAO da memoria
 }
 
 void AddShader(GLenum shaderType, const char* shaderCode) {
-    //ComeÁamos a compilar cada shader
-    //1. Criar um shader
+    // comecando a compilar cada shader
+    //1. criar um shader
     GLuint shader = glCreateShader(shaderType);
     
-    //2. Atribui o cÛdigo do GLSL para o shader
-    //2.1 Guarda e converte a vari·vel char em GLchar
+    //2. atribui o codigo do GLSL para o shader
+    //2.1 guarda e converte a variavel char em GLchar
     const GLchar* code[1];
     code[0] = shaderCode;
     
-    //2.2 Anexa o cÛdigo ao shader
-    glShaderSource(shader, 1, code, NULL); //1: n˙mero de cÛdigos que est„o sendo enviados | NULL: final da string, termina o cÛdigo
+    //2.2 anexa o codigo ao shader
+    glShaderSource(shader, 1, code, NULL); //1: numero de codigos que estao sendo enviados | NULL: final da string, termina o codigo
 
-    //3. Compila o shader
-    glCompileShader(shader); //compila o shader
+    //3. compila o shader
+    glCompileShader(shader); // compila o shader
 
-    //4. Tratamento de erros de compilaÁ„o
+    //4. tratamento de erros de compilacao
     GLint result = 0;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &result); //Colocar o valor do o status da compilaÁ„o na vari·vel result
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &result); // colocar o valor do o status da compilacao na variavel result
     if (!result) {
         GLchar log[1024] = { 0 };
-        glGetProgramInfoLog(shader, sizeof(log), NULL, log); //Busca o texto caso de algum erro na compilaÁ„o
-        printf("Erro ao compilar o %d shader '%s'\n", shaderType, log);
+        glGetProgramInfoLog(shader, sizeof(log), NULL, log); // busca o texto caso de algum erro na compilacao
+        printf("erro ao compilar o %d shader '%s'\n", shaderType, log);
         return;
     }
 
-    //5. Anexa o shader ao programa
-    glAttachShader(pShader, shader); //Anexa shader ao programa "vari·vel global"
+    //5. anexa o shader ao programa
+    glAttachShader(pShader, shader); //anexa shader ao programa "variavel global"
 }
 
 void CompileShader() {
-    //1. Criar um programa
-    pShader = glCreateProgram(); //Inicia o programa
+    //1. criar um programa
+    pShader = glCreateProgram(); //inicia o programa
     if (!pShader) {
-        printf("Erro ao criar o programa");
+        printf("erro ao criar o programa");
         return;
     }
 
-    //2. Compila o Vertex Shader
+    //2. compila o Vertex Shader
     AddShader(GL_VERTEX_SHADER, vShader);
-    //3. Compila o Fragment Shader
+    //3. compila o Fragment Shader
     AddShader(GL_FRAGMENT_SHADER, fShader);
 
-    //4. Criar o link do programa
-    glLinkProgram(pShader); //Programa
+    //4. criar o link do programa
+    glLinkProgram(pShader); // programa
 
-    //5. ValidaÁ„o de link do programa
+    //5. validacao de link do programa
     GLint result = 0;
-    glGetProgramiv(pShader, GL_LINK_STATUS, &result); //Colocar o valor do o status da compilaÁ„o na vari·vel result
+    glGetProgramiv(pShader, GL_LINK_STATUS, &result); // colocar o valor do o status da compilacao na variavel result
     if (!result) {
         GLchar log[1024] = { 0 };
-        glGetProgramInfoLog(pShader, sizeof(log), NULL, log); //Busca o texto caso de algum erro na compilaÁ„o
-        printf("Erro ao linkar o programa: '%s'\n", log);
+        glGetProgramInfoLog(pShader, sizeof(log), NULL, log); // busca o texto caso de algum erro na compilacao
+        printf("erro ao linkar o programa: '%s'\n", log);
         return;
     }
 
-    //6. ValidaÁ„o do programa
+    //6. validacao do programa
     glValidateProgram(pShader);
     result = 0;
-    glGetProgramiv(pShader, GL_VALIDATE_STATUS, &result); //Colocar o valor do o status da compilaÁ„o na vari·vel result
+    glGetProgramiv(pShader, GL_VALIDATE_STATUS, &result); // colocar o valor do o status da compilacao na variavel result
     if (!result) {
         GLchar log[1024] = { 0 };
-        glGetProgramInfoLog(pShader, sizeof(log), NULL, log); //Busca o texto caso de algum erro na compilaÁ„o
-        printf("Erro ao validar o programa: '%s'\n", log);
+        glGetProgramInfoLog(pShader, sizeof(log), NULL, log); // busca o texto caso de algum erro na compilacao
+        printf("erro ao validar o programa: '%s'\n", log);
         return;
     }
 }
@@ -153,7 +153,7 @@ int main() {
     auto t_start = std::chrono::high_resolution_clock::now();
     //INICIALIZAR O GLFW
     if (!glfwInit()) {
-        printf("GLFW Nao foi inicializado");
+        printf("GLFW nao foi inicializado");
         glfwTerminate();
         return 1;
     };
@@ -166,78 +166,78 @@ int main() {
     //Forward Functions
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "Nova Janela", NULL, NULL);
+    GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "splash", NULL, NULL);
     if (!mainWindow) {
         printf("GLWF nao criou a janela");
         glfwTerminate();
         return 1;
     }
 
-    //Pegar o buffer size da largura e altura
+    // pegar o buffer size da largura e altura
     int bufferWidth, bufferHeight;
     glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
 
-    //Configurando a janela principal
+    // configurando a janela principal
     glfwMakeContextCurrent(mainWindow);
 
     //GLEW
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK) {
-        printf("Glew nao foi iniciado");
+        printf("glew nao foi iniciado");
         glfwDestroyWindow(mainWindow);
         glfwTerminate();
         return 1;
     };
 
-    //Configurando viewport
+    // configurando viewport
     glViewport(0, 0, bufferWidth, bufferHeight);
 
-    //Criar o Triangulo
-    CreateTriangle(); //Coloca os dados na memÛria da placa de vÌdeo
-    CompileShader(); //Compila os Shaders
+    // criar o Triangulo
+    CreateTriangle(); // coloca os dados na memoria da placa de video
+    CompileShader(); // compila os Shaders
     
     while (!glfwWindowShouldClose(mainWindow)) {
-        //Ativa inputs e eventos
+        //ativa inputs e eventos
         glfwPollEvents();
 
         /********************************
-        * Cor de fundo da tela
+        * cor de fundo da tela
         *********************************/
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);//Limpa a janela, cor
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);// limpa a janela, cor
         glClear(GL_COLOR_BUFFER_BIT);
 
         /********************************
-        * Triangulo
+        * triangulo
         *********************************/
-        //Desenhar o triangulo
-        glUseProgram(pShader); //Usar o programa
-        glBindVertexArray(VAO); //Deixa na memÛria os links para serem utilizados
+        //desenhar o triangulo
+        glUseProgram(pShader); //usar o programa
+        glBindVertexArray(VAO); //deixa na memoria os links para serem utilizados
 
             /********************************
-            * Cor do triangulo
+            * cor do triangulo
             *********************************/
             auto t_now = std::chrono::high_resolution_clock::now();
             float time = std::chrono::duration_cast<std::chrono::duration<float>>(t_now - t_start).count();
             
-            GLint uniColor = glGetUniformLocation(pShader, "triangleColor"); //Procura a entrada chamada triangleColor
+            GLint uniColor = glGetUniformLocation(pShader, "triangleColor"); //procura a entrada chamada triangleColor
             float r = (sin(time * 4.0f) + 1.0f) / 2.0f;
             float g = 0.0f;
             float b = 0.0f;
             glUniform3f(uniColor, r, g, b);
 
             /********************************
-            * Movimenta triangulo
+            * movimenta triangulo
             *********************************/
-            //Regra para movimentaÁ„o
-            if (direction) //se a direÁ„o for true, andar para direita
+            //regra para movimentacao
+            if (direction) //se a direcao for true, andar para direita
                 triOffset += triIncrement; //incrementa valor no offset para andar para direita
-            else //se a direÁ„o for false, andar para esquerda
+            else //se a direcao for false, andar para esquerda
                 triOffset -= triIncrement; //decrementa o valor no offset para andar para esquerda
 
-            if (abs(triOffset) >= triOffsetMax) //se o valor for igual ou maior que o m·ximo, mudar a direÁ„o
-                direction = !direction; //inverte a direÁ„o
+            if (abs(triOffset) >= triOffsetMax) //se o valor for igual ou maior que o maximo, mudar a direcao
+                direction = !direction; //inverte a direcao
             
-            //Regra para alteraÁ„o de tamanho
+            //regra para alteracao de tamanho
             if (sizeDirection)
                 size += sizeIncrement;
             else
@@ -246,7 +246,7 @@ int main() {
             if (size >= maxSize || size <= minSize)
                 sizeDirection = !sizeDirection;
             
-            //Rega para calcular o angulo
+            //regra para calcular o angulo
             if (angleDirection)
                 angle += angleIncrement;
             else
@@ -255,29 +255,29 @@ int main() {
             if (angle >= maxAngle || angle <= minAngle)
                 angleDirection = !angleDirection;
 
-            GLint uniModel = glGetUniformLocation(pShader, "model"); //Procura a entrada chamada xMove
-            glm::mat4 model(1.0f); //cria uma matriz 4x4 e coloca os valores 1.0f em todas as posiÁıes
+            GLint uniModel = glGetUniformLocation(pShader, "model"); //procura a entrada chamada xMove
+            glm::mat4 model(1.0f); //cria uma matriz 4x4 e coloca os valores 1.0f em todas as posicoes
             
-            //Rotate
+            //rotate
             model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 
-            //movimentaÁ„o
-            model = glm::translate(model, glm::vec3(triOffset, 0.0f ,0.0f)); //traduz o modelo para movimentar a posiÁ„o (x,y,z)
+            //movimentacao
+            model = glm::translate(model, glm::vec3(triOffset, 0.0f ,0.0f)); //traduz o modelo para movimentar a posicao (x,y,z)
 
-            //Tamanho
+            //tamanho
             model = glm::scale(model, glm::vec3(size, size, 1.0f));
 
             glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
 
         /********************************
-        * Finaliza o triangulo na tela
+        * finaliza o triangulo na tela
         *********************************/
-        glDrawArrays(GL_TRIANGLES, 0, 3); //Desenha na tela GL_TRIANGLE | 0: Primeira  | 3: Quantidade de VÈrtices (-1-1, 1,-1, 0,1)
+        glDrawArrays(GL_TRIANGLES, 0, 3); //desenha na tela GL_TRIANGLE | 0: primeira  | 3: quantidade de vertices (-1-1, 1,-1, 0,1)
                 
-        glBindVertexArray(0); //Removo o VAO da memÛria
-        glUseProgram(0); //Removo o Programa da memÛria
+        glBindVertexArray(0); //removo o VAO da memoria
+        glUseProgram(0); //removo o programa da memoria
 
-        //Atualiza a tela
+        //atualiza a tela
         glfwSwapBuffers(mainWindow);
     }
 
