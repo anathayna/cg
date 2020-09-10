@@ -33,10 +33,13 @@ static const char* vShader = "                           \n\
                                                          \n\
 layout(location=0) in vec3 pos;                          \n\
                                                          \n\
+out vec4 vCol;                                           \n\
+                                                         \n\
 uniform mat4 model;                                      \n\
                                                          \n\
 void main(){                                             \n\
   gl_Position = model * vec4(pos, 1.0);                  \n\
+  vCol = vec4(clamp(pos, 0.0f, 1.0f), 1.0f);             \n\
 }                                                        \n\
 ";
 
@@ -45,10 +48,12 @@ static const char* fShader = "                   \n\
                                                  \n\
 uniform vec3 triangleColor;                      \n\
                                                  \n\
+in vec4 vCol;                                    \n\
+                                                 \n\
 out vec4 color;                                  \n\
                                                  \n\
 void main(){                                     \n\
-  color =  vec4(triangleColor, 1.0);             \n\
+  color =  vCol;                                 \n\
 }                                                \n\
 ";
 
