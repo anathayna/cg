@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3622285D250AFC3000A20C5E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3622285B250AFC3000A20C5E /* mesh.cpp */; };
 		36C5C0FF24EF5AA100886F25 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36C5C0FE24EF5AA100886F25 /* main.cpp */; };
 		36C5C10824EF5B2400886F25 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C5C10724EF5B2400886F25 /* OpenGL.framework */; };
 		36C5C10A24EF5B5300886F25 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C5C10924EF5B5300886F25 /* libGLEW.2.1.0.dylib */; };
@@ -26,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3622285B250AFC3000A20C5E /* mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
+		3622285C250AFC3000A20C5E /* mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
 		36C5C0FB24EF5AA100886F25 /* splash */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = splash; sourceTree = BUILT_PRODUCTS_DIR; };
 		36C5C0FE24EF5AA100886F25 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		36C5C10524EF5AD300886F25 /* splashRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = splashRelease.entitlements; sourceTree = "<group>"; };
@@ -70,6 +73,8 @@
 			children = (
 				36C5C10524EF5AD300886F25 /* splashRelease.entitlements */,
 				36C5C0FE24EF5AA100886F25 /* main.cpp */,
+				3622285B250AFC3000A20C5E /* mesh.cpp */,
+				3622285C250AFC3000A20C5E /* mesh.hpp */,
 			);
 			path = splash;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3622285D250AFC3000A20C5E /* mesh.cpp in Sources */,
 				36C5C0FF24EF5AA100886F25 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
