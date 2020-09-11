@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <vector>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -23,36 +24,31 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-
 const GLint WIDTH = 800, HEIGHT = 600;
 GLuint pShader;
 
 std::vector<mesh*> meshList;
 
-//variaveis globais
-bool moveToRight = true;
-bool sizeDirection = true;
-bool angleDirection = true;
+//Variaveis globais
+bool direction = true, sizeDirection = true, angleDirection = true; //se for true andar para a direita se for false andar para a esquerda
+float triOffset = 0.0f, triOffsetMax = 0.7f, triIncrement = 0.005f;
+float size = 0.4f, maxSize = 0.8f, minSize = 0.1f, sizeIncrement = 0.005f;
+float angle = 0.0, maxAngle = 360.0f, minAngle = 0.0f, angleIncrement = 0.1f;
 
-float triOffset = 0.0f, triOffsetMAX = 0.7f, triIncrement = 0.01f;
-float size = 0.4f, maxSize = 0.8f, minSize = 0.1f, sizeIncrement = 0.01f;
-float angle = 0.0f, maxAngle = 360.0f,minAngle = 0.0f, angleIncrement = 0.8f;
-
-
-static const char* vShader = "                                  \n\
-#version 330                                                    \n\
-                                                                \n\
-layout(location=0) in vec3 pos;                                 \n\
-                                                                \n\
-out vec4 vCol;                                                  \n\
-                                                                \n\
-uniform mat4 model;                                             \n\
-uniform mat4 projection;                                        \n\
-                                                                \n\
-void main(){                                                    \n\
-  gl_Position =  projection * model * vec4(pos, 1.0);           \n\
-  vCol = vec4(clamp(pos, 0.0f, 1.0f), 1.0f);                    \n\
-}                                                               \n\
+static const char* vShader = "                           \n\
+#version 330                                             \n\
+                                                         \n\
+layout(location=0) in vec3 pos;                          \n\
+                                                         \n\
+out vec4 vCol;                                           \n\
+                                                         \n\
+uniform mat4 model;                                      \n\
+uniform mat4 projection;                                 \n\
+                                                         \n\
+void main(){                                             \n\
+  gl_Position = projection * model * vec4(pos, 1.0);     \n\
+  vCol = vec4(clamp(pos, 0.0f, 1.0f), 1.0f);             \n\
+}                                                        \n\
 ";
 
 static const char* fShader = "                   \n\
@@ -71,26 +67,26 @@ void main(){                                     \n\
 
 void CreateTriangle() {
     GLfloat vertices[] = {
-         0.0f,  1.0f, 0.0f,   //Vértice 0 (x,y,z)
-         1.0f, -1.0f, 0.0f,   //Vértice 1 (x,y,z)
-        -1.0f, -1.0f, 0.0f,   //Vértice 2 (x,y,z)
-         0.0f,  0.0f, 1.0f    //Vértice 3 (x,y,z)
+        0.0f,  1.0f, 0.0f,   //Vértice 0 (x,y,z)
+        1.0f, -1.0f, 0.0f,   //Vértice 1 (x,y,z)
+       -1.0f, -1.0f, 0.0f,   //Vértice 2 (x,y,z)
+        0.0f, -1.0f, 1.0f    //Vértice 3 (x,y,z)
     };
-    
-    //0 0 0 (Preto)
-    //1 0 0 (Preto)
-    //0 1 0 (Preto)
-    
+
     unsigned int indices[] = {
-        0,1,2,  // frente da piramide
-        0,1,3,  // Parede esquerda
-        0,2,3,  // Parede direita
-        1,2,3  // Base
+        0,1,2, //Frente da pirâmide
+        0,1,3, //Parede lateral direita
+        0,2,3, //Parede lateral esquerda
+        1,2,3  //Base da pirâmide
     };
-    
-    mesh* obj = new mesh();
-    obj->CreateMesh(vertices, indices, sizeof(vertices), sizeof(indices));
-    meshList.push_back(obj);
+
+    mesh* obj1 = new mesh();
+    obj1->CreateMesh(vertices, indices, sizeof(vertices), sizeof(indices));
+    meshList.push_back(obj1);
+
+    mesh* obj2 = new mesh();
+    obj2->CreateMesh(vertices, indices, sizeof(vertices), sizeof(indices));
+    meshList.push_back(obj2);
 }
 
 void AddShader(GLenum shaderType, const char* shaderCode) {
@@ -162,10 +158,9 @@ void CompileShader() {
 }
 
 int main() {
-    auto t_start = std::chrono::high_resolution_clock::now();
     //INICIALIZAR O GLFW
     if (!glfwInit()) {
-        printf("GLFW nao foi inicializado");
+        printf("GLFW Nao foi inicializado");
         glfwTerminate();
         return 1;
     };
@@ -178,7 +173,7 @@ int main() {
     //Forward Functions
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "splash", NULL, NULL);
+    GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "Nova Janela", NULL, NULL);
     if (!mainWindow) {
         printf("GLWF nao criou a janela");
         glfwTerminate();
@@ -200,8 +195,8 @@ int main() {
         glfwTerminate();
         return 1;
     };
-    
-    glEnable(GL_DEPTH_TEST);
+
+    glEnable(GL_DEPTH_TEST); //Habilitar o Depth Test
 
     //Configurando viewport
     glViewport(0, 0, bufferWidth, bufferHeight);
@@ -210,86 +205,88 @@ int main() {
     CreateTriangle(); //Coloca os dados na memória da placa de vídeo
     CompileShader(); //Compila os Shaders
     
-    glm::mat4 projection = glm::perspective(45.0f, (GLfloat) bufferWidth / (GLfloat) bufferHeight, 0.1f, 100.0f);
-
-    
     while (!glfwWindowShouldClose(mainWindow)) {
         //Ativa inputs e eventos
         glfwPollEvents();
 
-        //Limpa a janela, cor
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClear(GL_COLOR_BUFFER_BIT);
+        /********************************
+        * Cor de fundo da tela
+        *********************************/
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);//Limpa a janela, cor
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Espaço de memória
 
+        /********************************
+        * Triangulo
+        *********************************/
         //Desenhar o triangulo
         glUseProgram(pShader); //Usar o programa
-        
-        auto t_now = std::chrono::high_resolution_clock::now();
-        float time = std::chrono::duration_cast<std::chrono::duration<float>>(t_now - t_start).count();
-            
-        GLint uniColor = glGetUniformLocation(pShader, "triangleColor"); //Procura a entrada chamada triangleColor
-        float r = (sin(time * 4.0f) + 1.0f) / 2.0f;
-        float g = 0.0f;
-        float b = 0.0f;
-        glUniform3f(uniColor, r, g, b);
 
-        // Movimenta o triangulo
-        if (moveToRight) {
-            triOffset += triIncrement;
-        } else {
-            triOffset -= triIncrement;
-        }
-        
-        if (abs(triOffset) >= triOffsetMAX) {
-            moveToRight = !moveToRight;
-        }
-        
-        // Alteração de tamanho
-        if (sizeDirection) {
-            size += sizeIncrement;
-        } else {
-            size -= sizeIncrement;
-        }
-        
-        if (size >= maxSize || size <= minSize) {
-            sizeDirection = !sizeDirection;
-        }
-        
-        // Calcular o angulo
-        if (angleDirection) {
-            angle += angleIncrement;
-        } else {
-            angle -= angleIncrement;
-        }
-        
-        if (angle >= maxAngle || angle <= minAngle) {
-            angleDirection = !angleDirection;
-        }
-        
-        GLint uniModel = glGetUniformLocation(pShader, "model");
-        glm::mat4 model(1.0f); // cria uma matriz 4x4 e coloca os valores 1.0f em todas as posições
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.0f)); // traduz o modelo para movimentar a posição (x,y,z)
-        
-        // Tamanho
-        model = glm::scale(model, glm::vec3(0.4f, 0.4, 0.4f));
-        
-        // Rotate
-        model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-        
-        
-        
-        // movimentação (uniModel, 1 uma matriz, GL_FALSE: não está transposta, glm::value_ptr(model): transforma para pontos)
-        glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
-        
-        GLint uniProjection = glGetUniformLocation(pShader, "projection");
-        glUniformMatrix4fv(uniProjection, 1, GL_FALSE, glm::value_ptr(projection));
-        
-        //glDrawArrays(GL_TRIANGLES, 0, 3); //Desenha na tela GL_TRIANGLE | 0: Primeira  | 3: Quantidade de Vértices (-1-1, 1,-1, 0,1)
-                
+            /********************************
+            * Movimenta triangulo
+            *********************************/
+            //Regra para movimentação
+            if (direction) //se a direção for true, andar para direita
+                triOffset += triIncrement; //incrementa valor no offset para andar para direita
+            else //se a direção for false, andar para esquerda
+                triOffset -= triIncrement; //decrementa o valor no offset para andar para esquerda
+
+            if (abs(triOffset) >= triOffsetMax) //se o valor for igual ou maior que o máximo, mudar a direção
+                direction = !direction; //inverte a direção
+            
+            //Regra para alteração de tamanho
+            if (sizeDirection)
+                size += sizeIncrement;
+            else
+                size -= sizeIncrement;
+
+            if (size >= maxSize || size <= minSize)
+                sizeDirection = !sizeDirection;
+            
+            //Rega para calcular o angulo
+            if (angleDirection)
+                angle += angleIncrement;
+            else
+                angle -= angleIncrement;
+
+            if (angle >= maxAngle || angle <= minAngle)
+                angleDirection = !angleDirection;
+
+
+            //CALCULA AS MUDANÇAS DA MODEL
+            GLint uniModel = glGetUniformLocation(pShader, "model"); //Procura a entrada chamada model
+            glm::mat4 model(1.0f); //cria uma matriz 4x4 e coloca os valores 1.0f em todas as posições
+            
+            //movimentação
+            model = glm::translate(model, glm::vec3(triOffset, -0.5f, -2.5f)); //traduz o modelo para movimentar a posição (x,y,z)
+
+            //Rotate
+            model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+
+            //Tamanho
+            model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+            glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
+
+            //CALCULA AS MUDANÇAS DA PROJEÇÃO
+            GLint uniProjection = glGetUniformLocation(pShader, "projection"); //Procura a entrada chamada projection
+            glm::mat4 projection = glm::perspective(1.0f, (GLfloat)bufferWidth / (GLfloat)bufferHeight, 0.1f, 100.0f);
+            //Adiciona no vertex o valor calculado
+            glUniformMatrix4fv(uniProjection, 1, GL_FALSE, glm::value_ptr(projection));
+
+        /********************************
+        * Finaliza o triangulo na tela
+        *********************************/
         meshList[0]->RenderMesh();
+
+        model = glm::mat4(1.0f); //cria uma matriz 4x4 colocando 1.0f em cada uma das posições
+        model = glm::translate(model, glm::vec3(-triOffset, 0.5f, -2.5f)); //traduz o modelo para movimentar a posição (x,y,z)
+        model = glm::rotate(model, glm::radians(-angle), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+        glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
+        meshList[1]->RenderMesh();
+        
         glUseProgram(0); //Removo o Programa da memória
 
+        //Atualiza a tela
         glfwSwapBuffers(mainWindow);
     }
 
