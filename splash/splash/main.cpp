@@ -107,7 +107,7 @@ void CreateTriangle() {
             glEnableVertexAttribArray(0); //0: shader location
 
         glBindBuffer(GL_ARRAY_BUFFER, 0); //remove o VBO da memória
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); //remove o IBO da memória
+      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); //remove o IBO da memória
     glBindVertexArray(0); //remove o VAO da memória
 }
 
@@ -183,7 +183,7 @@ int main() {
     auto t_start = std::chrono::high_resolution_clock::now();
     //INICIALIZAR O GLFW
     if (!glfwInit()) {
-        printf("GLFW Nao foi inicializado");
+        printf("GLFW nao foi inicializado");
         glfwTerminate();
         return 1;
     };
@@ -196,7 +196,7 @@ int main() {
     //Forward Functions
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "Nova Janela", NULL, NULL);
+    GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "splash", NULL, NULL);
     if (!mainWindow) {
         printf("GLWF nao criou a janela");
         glfwTerminate();
