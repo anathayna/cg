@@ -27,6 +27,8 @@
 const GLint WIDTH = 800, HEIGHT = 600;
 GLuint pShader;
 
+std::vector<mesh*> meshList;
+
 //variaveis globais
 bool moveToRight = true;
 bool sizeDirection = true;
@@ -87,7 +89,8 @@ void CreateTriangle() {
     };
     
     mesh* obj = new mesh();
-    obj->CreateMesh(vertices, indices, sizeof(vertices), sizeof(indices))
+    obj->CreateMesh(vertices, indices, sizeof(vertices), sizeof(indices));
+    meshList.push_back(obj);
 }
 
 void AddShader(GLenum shaderType, const char* shaderCode) {
@@ -284,7 +287,7 @@ int main() {
         
         //glDrawArrays(GL_TRIANGLES, 0, 3); //Desenha na tela GL_TRIANGLE | 0: Primeira  | 3: Quantidade de Vértices (-1-1, 1,-1, 0,1)
                 
-        glBindVertexArray(0); //Removo o VAO da memória
+        meshList[0]->RenderMesh();
         glUseProgram(0); //Removo o Programa da memória
 
         glfwSwapBuffers(mainWindow);
