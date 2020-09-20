@@ -19,6 +19,7 @@
 #include <math.h>
 
 #include "mesh.hpp"
+#include "shader.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -28,6 +29,10 @@ const GLint WIDTH = 800, HEIGHT = 600;
 GLuint pShader;
 
 std::vector<mesh*> meshList;
+std::vector<shader> shaderList;
+
+static const char* vertexLocation = "Shaders/VertexShader.glsl";
+static const char* fragmentLocation = "Shaders/FragmentShader.glsl";
 
 //variaveis globais
 bool direction = true, sizeDirection = true, angleDirection = true; //se for true andar para a direita se for false andar para a esquerda
@@ -287,6 +292,100 @@ int main() {
         glUseProgram(0); //removo o Programa da memória
 
         //atualiza a tela
+        glfwSwapBuffers(mainWindow);
+    }
+
+    return 0;
+}
+
+int main() {
+    //INICIALIZAR O GLFW
+    if (!glfwInit()) {
+        printf("GLFW Nao foi inicializado");
+        glfwTerminate();
+        return 1;
+    };
+
+    //GLFW OpenGL Version
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    //Core Profile
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    //Forward Functions
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
+    GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "Nova Janela", NULL, NULL);
+    if (!mainWindow) {
+        printf("GLWF nao criou a janela");
+        glfwTerminate();
+        return 1;
+    }
+
+    //Pegar o buffer size da largura e altura
+    int bufferWidth, bufferHeight;
+    glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
+
+    //Configurando a janela principal
+    glfwMakeContextCurrent(mainWindow);
+
+    //GLEW
+    glewExperimental = GL_TRUE;
+    if (glewInit() != GLEW_OK) {
+        printf("Glew nao foi iniciado");
+        glfwDestroyWindow(mainWindow);
+        glfwTerminate();
+        return 1;
+    };
+
+    glEnable(GL_DEPTH_TEST); //Habilitar o Depth Test
+
+    //Configurando viewport
+    glViewport(0, 0, bufferWidth, bufferHeight);
+
+    //Criar o Triangulo
+    CreateTriangle(); //Coloca os dados na memória da placa de vídeo
+    CreateShader(); //Cria os Shaders
+    
+    glm::mat4 projection = glm::perspective(1.0f, (GLfloat)bufferWidth / (GLfloat)bufferHeight, 0.1f, 100.0f);
+
+    while (!glfwWindowShouldClose(mainWindow)) {
+        //Ativa inputs e eventos
+        glfwPollEvents();
+
+        /********************************
+        * Cor de fundo da tela
+        *********************************/
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);//Limpa a janela, cor
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        /********************************
+        * Piramides
+        *********************************/
+        shaderList[0].UseProgram(); //Usar o programa
+        glUniformMatrix4fv(shaderList[0].getUniformProjection(), 1, GL_FALSE, glm::value_ptr(projection)); //Movimentação da projeção da camera
+        
+            /********************************
+            * Piramide 1
+            *********************************/
+            glm::mat4 model(1.0f); //cria uma matriz 4x4 e coloca os valores 1.0f em todas as posições
+            model = glm::translate(model, glm::vec3(0.0f, -0.25f, -2.5f)); //traduz o modelo para movimentar a posição (x,y,z)
+            model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+            //model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+            glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
+            meshList[0]->RenderMesh();
+
+            /********************************
+            * Piramide 2
+            *********************************/
+            model = glm::mat4(1.0f); //cria uma matriz 4x4 colocando 1.0f em cada uma das posições
+            model = glm::translate(model, glm::vec3(0.0f, 0.75f, -2.5f)); //traduz o modelo para movimentar a posição (x,y,z)
+            model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+            glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
+            meshList[1]->RenderMesh();
+        
+        glUseProgram(0); //Removo o Programa da memória
+
+        //Atualiza a tela
         glfwSwapBuffers(mainWindow);
     }
 

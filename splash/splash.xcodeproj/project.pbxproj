@@ -32,6 +32,8 @@
 		3622285C250AFC3000A20C5E /* mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
 		364FC76B25178CDD00BB5219 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
 		364FC76C25178CDD00BB5219 /* shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shader.hpp; sourceTree = "<group>"; };
+		364FC77025178EF100BB5219 /* FragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FragmentShader.glsl; sourceTree = "<group>"; };
+		364FC77125178EF100BB5219 /* VertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexShader.glsl; sourceTree = "<group>"; };
 		36C5C0FB24EF5AA100886F25 /* splash */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = splash; sourceTree = BUILT_PRODUCTS_DIR; };
 		36C5C0FE24EF5AA100886F25 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		36C5C10524EF5AD300886F25 /* splashRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = splashRelease.entitlements; sourceTree = "<group>"; };
@@ -54,6 +56,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		364FC76F25178E9700BB5219 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				364FC77025178EF100BB5219 /* FragmentShader.glsl */,
+				364FC77125178EF100BB5219 /* VertexShader.glsl */,
+			);
+			path = shaders;
+			sourceTree = "<group>";
+		};
 		36C5C0F224EF5AA100886F25 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +91,7 @@
 				3622285C250AFC3000A20C5E /* mesh.hpp */,
 				364FC76B25178CDD00BB5219 /* shader.cpp */,
 				364FC76C25178CDD00BB5219 /* shader.hpp */,
+				364FC76F25178E9700BB5219 /* shaders */,
 			);
 			path = splash;
 			sourceTree = "<group>";
