@@ -8,13 +8,13 @@
 
 #include "shader.hpp"
 
-Shader::Shader() {
+shader::shader() {
     shaderID = 0;
     uniformModel = 0;
     uniformProjection = 0;
 }
 
-Shader::~Shader() {
+shader::~shader() {
     if (shaderID != 0) {
         glDeleteProgram(shaderID);
         shaderID = 0;
@@ -23,15 +23,15 @@ Shader::~Shader() {
     uniformProjection = 0;
 }
 
-void Shader::UseProgram() {
+void shader::UseProgram() {
     glUseProgram(shaderID);
 }
 
-void Shader::CreateFromString(const char* vertexCode, const char* fragmentCode) {
+void shader::CreateFromString(const char* vertexCode, const char* fragmentCode) {
     CompileShader(vertexCode, fragmentCode);
 }
 
-void Shader::CreateFromFile(const char* vertexLocation, const char* fragmentLocation) {
+void shader::CreateFromFile(const char* vertexLocation, const char* fragmentLocation) {
     std::string vertexString = ReadFile(vertexLocation); //recebe os valores do arquivo
     std::string fragmentString = ReadFile(fragmentLocation); //recebe os valores do arquivo
     
@@ -41,7 +41,7 @@ void Shader::CreateFromFile(const char* vertexLocation, const char* fragmentLoca
     CompileShader(vertexCode, fragmentCode); //executa a compilação do código
 }
 
-std::string Shader::ReadFile(const char* fileLocation) {
+std::string shader::ReadFile(const char* fileLocation) {
     std::string content = ""; //variável de retorno
     std::ifstream fileStrem(fileLocation, std::ios::in); //abre o arquivo
 
@@ -60,7 +60,7 @@ std::string Shader::ReadFile(const char* fileLocation) {
 }
 
 
-void Shader::CompileShader(const char* vertexCode, const char* fragmentCode) {
+void shader::CompileShader(const char* vertexCode, const char* fragmentCode) {
     //1. criar um programa
     shaderID = glCreateProgram(); //inicia o programa
     if (!shaderID) {
@@ -101,7 +101,7 @@ void Shader::CompileShader(const char* vertexCode, const char* fragmentCode) {
     uniformModel = glGetUniformLocation(shaderID, "model"); //procura a entrada chamada model
 }
 
-void Shader::AddShader(GLenum shaderType, const char* shaderCode) {
+void shader::AddShader(GLenum shaderType, const char* shaderCode) {
     //começamos a compilar cada shader
     //1. criar um shader
     GLuint shader = glCreateShader(shaderType);

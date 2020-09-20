@@ -29,10 +29,10 @@ const GLint WIDTH = 800, HEIGHT = 600;
 GLuint pShader;
 
 std::vector<mesh*> meshList;
-std::vector<Shader> shaderList;
+std::vector<shader> shaderList;
 
-static const char* vertexLocation = "Shaders/VertexShader.glsl";
-static const char* fragmentLocation = "Shaders/FragmentShader.glsl";
+static const char* vertexLocation = "shaders/VertexShader.glsl";
+static const char* fragmentLocation = "shaders/FragmentShader.glsl";
 
 //variaveis globais
 bool direction = true, sizeDirection = true, angleDirection = true; //se for true andar para a direita se for false andar para a esquerda
@@ -65,7 +65,7 @@ void CreateTriangle() {
 }
 
 void CreateShader() {
-    Shader* shader1 = new Shader();
+    shader* shader1 = new shader();
     shader1->CreateFromFile(vertexLocation, fragmentLocation);
     shaderList.push_back(*shader1);
 }

@@ -17,10 +17,10 @@
 #include <iostream>
 #include <fstream>
 
-class Shader {
+class shader {
 public:
-    Shader();
-    ~Shader();
+    shader();
+    ~shader();
     void CreateFromString(const char* vertexCode, const char* fragmentCode);
     void CreateFromFile(const char* vertexLocation, const char* fragmentLocation);
     void UseProgram();
