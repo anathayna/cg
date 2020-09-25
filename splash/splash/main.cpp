@@ -26,19 +26,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 const GLint WIDTH = 800, HEIGHT = 600;
-GLuint pShader;
 
 std::vector<mesh*> meshList;
 std::vector<shader> shaderList;
 
 static const char* vertexLocation = "shaders/VertexShader.glsl";
 static const char* fragmentLocation = "shaders/FragmentShader.glsl";
-
-//variaveis globais
-bool direction = true, sizeDirection = true, angleDirection = true; //se for true andar para a direita se for false andar para a esquerda
-float triOffset = 0.0f, triOffsetMax = 0.7f, triIncrement = 0.005f;
-float size = 0.4f, maxSize = 0.8f, minSize = 0.1f, sizeIncrement = 0.005f;
-float angle = 0.0, maxAngle = 360.0f, minAngle = 0.0f, angleIncrement = 0.1f;
 
 void CreateTriangle() {
     GLfloat vertices[] = {
