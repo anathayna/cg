@@ -1,34 +1,21 @@
-//
-//  main.cpp
-//  splash
-//
-//  Created by Ana Thayna Franca on 20/08/20.
-//  Copyright © 2020 Ana Thayna Franca. All rights reserved.
-//
-
 #include <stdio.h>
-#include <string.h>
 #include <vector>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include <iostream>
-#include <time.h>
-#include <chrono>
-#include <math.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "mesh.hpp"
 #include "shader.hpp"
-
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 
 const GLint WIDTH = 800, HEIGHT = 600;
 
 std::vector<mesh*> meshList;
 std::vector<shader> shaderList;
+window mainWindow;
 
 static const char* vertexLocation = "shaders/VertexShader.glsl";
 static const char* fragmentLocation = "shaders/FragmentShader.glsl";
@@ -64,56 +51,16 @@ void CreateShader() {
 }
 
 int main() {
-    //inicializar O GLFW
-    if (!glfwInit()) {
-        printf("GLFW nao foi inicializado");
-        glfwTerminate();
-        return 1;
-    };
-
-    //GLFW OpenGL Version
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    //Core Profile
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    //Forward Functions
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-
-    GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "splash", NULL, NULL);
-    if (!mainWindow) {
-        printf("GLWF nao criou a janela");
-        glfwTerminate();
-        return 1;
-    }
-
-    //pegar o buffer size da largura e altura
-    int bufferWidth, bufferHeight;
-    glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
-
-    //configurando a janela principal
-    glfwMakeContextCurrent(mainWindow);
-
-    //GLEW
-    glewExperimental = GL_TRUE;
-    if (glewInit() != GLEW_OK) {
-        printf("Glew nao foi iniciado");
-        glfwDestroyWindow(mainWindow);
-        glfwTerminate();
-        return 1;
-    };
-
-    glEnable(GL_DEPTH_TEST); //habilitar o Depth Test
-
-    //configurando viewport
-    glViewport(0, 0, bufferWidth, bufferHeight);
+    mainWindow = sindow(800, 600);
+    mainWindow.initialize();
 
     //criar o triangulo
     CreateTriangle(); //coloca os dados na memória da placa de vídeo
     CreateShader(); //cria os Shaders
     
-    glm::mat4 projection = glm::perspective(1.0f, (GLfloat)bufferWidth / (GLfloat)bufferHeight, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(1.0f, mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
-    while (!glfwWindowShouldClose(mainWindow)) {
+    while (!mainWindow.getWindowShouldClose()) {
         //ativa inputs e eventos
         glfwPollEvents();
 
@@ -151,7 +98,7 @@ int main() {
         glUseProgram(0); //removo o programa da memória
 
         //atualiza a tela
-        glfwSwapBuffers(mainWindow);
+        mainWindow.swapBuffers();
     }
 
     return 0;

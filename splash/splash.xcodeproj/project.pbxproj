@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3622285D250AFC3000A20C5E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3622285B250AFC3000A20C5E /* mesh.cpp */; };
+		364B626F251D7B0400E20BB6 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 364B626D251D7B0400E20BB6 /* window.cpp */; };
 		364FC76D25178CDD00BB5219 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 364FC76B25178CDD00BB5219 /* shader.cpp */; };
 		36C5C0FF24EF5AA100886F25 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36C5C0FE24EF5AA100886F25 /* main.cpp */; };
 		36C5C10824EF5B2400886F25 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C5C10724EF5B2400886F25 /* OpenGL.framework */; };
@@ -30,6 +31,8 @@
 /* Begin PBXFileReference section */
 		3622285B250AFC3000A20C5E /* mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
 		3622285C250AFC3000A20C5E /* mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
+		364B626D251D7B0400E20BB6 /* window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = window.cpp; sourceTree = "<group>"; };
+		364B626E251D7B0400E20BB6 /* window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = window.hpp; sourceTree = "<group>"; };
 		364FC76B25178CDD00BB5219 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
 		364FC76C25178CDD00BB5219 /* shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shader.hpp; sourceTree = "<group>"; };
 		364FC77025178EF100BB5219 /* FragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FragmentShader.glsl; sourceTree = "<group>"; };
@@ -92,6 +95,8 @@
 				364FC76B25178CDD00BB5219 /* shader.cpp */,
 				364FC76C25178CDD00BB5219 /* shader.hpp */,
 				364FC76F25178E9700BB5219 /* shaders */,
+				364B626D251D7B0400E20BB6 /* window.cpp */,
+				364B626E251D7B0400E20BB6 /* window.hpp */,
 			);
 			path = splash;
 			sourceTree = "<group>";
@@ -166,6 +171,7 @@
 				364FC76D25178CDD00BB5219 /* shader.cpp in Sources */,
 				3622285D250AFC3000A20C5E /* mesh.cpp in Sources */,
 				36C5C0FF24EF5AA100886F25 /* main.cpp in Sources */,
+				364B626F251D7B0400E20BB6 /* window.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

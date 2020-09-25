@@ -61,72 +61,72 @@ std::string shader::ReadFile(const char* fileLocation) {
 
 
 void shader::CompileShader(const char* vertexCode, const char* fragmentCode) {
-    //1. criar um programa
-    shaderID = glCreateProgram(); //inicia o programa
+    //1. Criar um programa
+    shaderID = glCreateProgram(); //Inicia o programa
     if (!shaderID) {
         printf("erro ao criar o programa");
         return;
     }
 
-    //2. compila o Vertex Shader
+    //2. Compila o Vertex Shader
     AddShader(GL_VERTEX_SHADER, vertexCode);
-    //3. compila o Fragment Shader
+    //3. Compila o Fragment Shader
     AddShader(GL_FRAGMENT_SHADER, fragmentCode);
 
-    //4. criar o link do programa
-    glLinkProgram(shaderID); //programa
+    //4. Criar o link do programa
+    glLinkProgram(shaderID); //Programa
 
-    //5. validação de link do programa
+    //5. Validação de link do programa
     GLint result = 0;
-    glGetProgramiv(shaderID, GL_LINK_STATUS, &result); //colocar o valor do o status da compilação na variável result
+    glGetProgramiv(shaderID, GL_LINK_STATUS, &result); //Colocar o valor do o status da compilação na variável result
     if (!result) {
         GLchar log[1024] = { 0 };
-        glGetProgramInfoLog(shaderID, sizeof(log), NULL, log); //busca o texto caso de algum erro na compilação
+        glGetProgramInfoLog(shaderID, sizeof(log), NULL, log); //Busca o texto caso de algum erro na compilação
         printf("erro ao linkar o programa: '%s'\n", log);
         return;
     }
 
-    //6. validação do programa
+    //6. Validação do programa
     glValidateProgram(shaderID);
     result = 0;
-    glGetProgramiv(shaderID, GL_VALIDATE_STATUS, &result); //colocar o valor do o status da compilação na variável result
+    glGetProgramiv(shaderID, GL_VALIDATE_STATUS, &result); //Colocar o valor do o status da compilação na variável result
     if (!result) {
         GLchar log[1024] = { 0 };
-        glGetProgramInfoLog(shaderID, sizeof(log), NULL, log); //busca o texto caso de algum erro na compilação
+        glGetProgramInfoLog(shaderID, sizeof(log), NULL, log); //Busca o texto caso de algum erro na compilação
         printf("erro ao validar o programa: '%s'\n", log);
-        return;
+        //return;
     }
 
-    uniformProjection = glGetUniformLocation(shaderID, "projection"); //procura a entrada chamada projection
-    uniformModel = glGetUniformLocation(shaderID, "model"); //procura a entrada chamada model
+    uniformProjection = glGetUniformLocation(shaderID, "projection"); //Procura a entrada chamada projection
+    uniformModel = glGetUniformLocation(shaderID, "model"); //Procura a entrada chamada model
 }
 
 void shader::AddShader(GLenum shaderType, const char* shaderCode) {
-    //começamos a compilar cada shader
-    //1. criar um shader
+    //Começamos a compilar cada shader
+    //1. Criar um shader
     GLuint shader = glCreateShader(shaderType);
 
-    //2. atribui o código do GLSL para o shader
-    //2.1 guarda e converte a variável char em GLchar
+    //2. Atribui o código do GLSL para o shader
+    //2.1 Guarda e converte a variável char em GLchar
     const GLchar* code[1];
     code[0] = shaderCode;
 
-    //2.2 anexa o código ao shader
+    //2.2 Anexa o código ao shader
     glShaderSource(shader, 1, code, NULL); //1: número de códigos que estão sendo enviados | NULL: final da string, termina o código
 
-    //3. compila o shader
+    //3. Compila o shader
     glCompileShader(shader); //compila o shader
 
-    //4. tratamento de erros de compilação
+    //4. Tratamento de erros de compilação
     GLint result = 0;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &result); //colocar o valor do o status da compilação na variável result
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &result); //Colocar o valor do o status da compilação na variável result
     if (!result) {
         GLchar log[1024] = { 0 };
-        glGetProgramInfoLog(shader, sizeof(log), NULL, log); //busca o texto caso de algum erro na compilação
+        glGetProgramInfoLog(shader, sizeof(log), NULL, log); //Busca o texto caso de algum erro na compilação
         printf("erro ao compilar o %d shader '%s'\n", shaderType, log);
         return;
     }
 
-    //5. anexa o shader ao programa
-    glAttachShader(shaderID, shader); //anexa shader ao programa "variável global"
+    //5. Anexa o shader ao programa
+    glAttachShader(shaderID, shader); //Anexa shader ao programa "variável global"
 }
