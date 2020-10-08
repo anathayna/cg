@@ -1,3 +1,11 @@
+//
+//  main.cpp
+//  splash
+//
+//  Created by Ana Thayna Franca on 13/08/20.
+//  Copyright © 2020 Ana Thayna Franca. All rights reserved.
+//
+
 #include <stdio.h>
 #include <vector>
 
@@ -10,22 +18,26 @@
 
 #include "mesh.hpp"
 #include "shader.hpp"
-
-const GLint WIDTH = 800, HEIGHT = 600;
+#include "window.hpp"
+#include "camera.hpp"
 
 std::vector<mesh*> meshList;
 std::vector<shader> shaderList;
 window mainWindow;
+camera camera;
 
-static const char* vertexLocation = "shaders/VertexShader.glsl";
-static const char* fragmentLocation = "shaders/FragmentShader.glsl";
+//old version of FPS
+GLfloat deltaTime = 0.0f, lastime = 0.0f;
+
+static const char* vertexLocation = "./shaders/VertexShader.glsl";
+static const char* fragmentLocation = "./shaders/FragmentShader.glsl";
 
 void CreateTriangle() {
     GLfloat vertices[] = {
-        0.0f,  1.0f, 0.0f,   //vértice 0 (x,y,z)
-        1.0f, -1.0f, 0.0f,   //vértice 1 (x,y,z)
-       -1.0f, -1.0f, 0.0f,   //vértice 2 (x,y,z)
-        0.0f, -1.0f, 1.0f    //vértice 3 (x,y,z)
+        0.0f,  1.0f, 0.0f,  //vértice 0 (x,y,z)
+        1.0f, -1.0f, 0.0f,  //vértice 1 (x,y,z)
+       -1.0f, -1.0f, 0.0f,  //vértice 2 (x,y,z)
+        0.0f, -1.0f, 1.0f   //vértice 3 (x,y,z)
     };
 
     unsigned int indices[] = {
@@ -51,23 +63,34 @@ void CreateShader() {
 }
 
 int main() {
-    mainWindow = sindow(800, 600);
+    mainWindow = window(800, 600);
     mainWindow.initialize();
 
-    //criar o triangulo
+    //criar o Triangulo
     CreateTriangle(); //coloca os dados na memória da placa de vídeo
     CreateShader(); //cria os Shaders
+
+    camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f, 5.0f, 8.0f);
     
     glm::mat4 projection = glm::perspective(1.0f, mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
     while (!mainWindow.getWindowShouldClose()) {
+        //old version of FPS
+        GLfloat now = glfwGetTime();
+        deltaTime = now - lastime;
+        lastime = now;
+
         //ativa inputs e eventos
         glfwPollEvents();
+
+        //controle do teclado
+        camera.keyControl(mainWindow.getKeys(), deltaTime);
+        camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange(), deltaTime);
 
         /********************************
         * cor de fundo da tela
         *********************************/
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f); //limpa a janela, cor
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);//limpa a janela, cor
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         /********************************
@@ -75,6 +98,7 @@ int main() {
         *********************************/
         shaderList[0].UseProgram(); //usar o programa
         glUniformMatrix4fv(shaderList[0].getUniformProjection(), 1, GL_FALSE, glm::value_ptr(projection)); //movimentação da projeção da camera
+        glUniformMatrix4fv(shaderList[0].getUniformView(), 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
         
             /********************************
             * piramide 1

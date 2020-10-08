@@ -14,6 +14,7 @@
 		36C5C10824EF5B2400886F25 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C5C10724EF5B2400886F25 /* OpenGL.framework */; };
 		36C5C10A24EF5B5300886F25 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C5C10924EF5B5300886F25 /* libGLEW.2.1.0.dylib */; };
 		36C5C10C24EF5B8E00886F25 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C5C10B24EF5B8E00886F25 /* libglfw.3.3.dylib */; };
+		36D546D62526991D006C02E6 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36D546D42526991D006C02E6 /* camera.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,8 @@
 		36C5C10724EF5B2400886F25 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		36C5C10924EF5B5300886F25 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../usr/local/Cellar/glew/2.1.0_1/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		36C5C10B24EF5B8E00886F25 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../usr/local/Cellar/glfw/3.3.2/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
+		36D546D42526991D006C02E6 /* camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		36D546D52526991D006C02E6 /* camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +100,8 @@
 				364FC76F25178E9700BB5219 /* shaders */,
 				364B626D251D7B0400E20BB6 /* window.cpp */,
 				364B626E251D7B0400E20BB6 /* window.hpp */,
+				36D546D42526991D006C02E6 /* camera.cpp */,
+				36D546D52526991D006C02E6 /* camera.hpp */,
 			);
 			path = splash;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 				3622285D250AFC3000A20C5E /* mesh.cpp in Sources */,
 				36C5C0FF24EF5AA100886F25 /* main.cpp in Sources */,
 				364B626F251D7B0400E20BB6 /* window.cpp in Sources */,
+				36D546D62526991D006C02E6 /* camera.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
