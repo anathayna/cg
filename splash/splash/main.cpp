@@ -23,8 +23,8 @@
 
 std::vector<mesh*> meshList;
 std::vector<shader> shaderList;
-window mainWindow;
-camera camera;
+Window mainWindow;
+Camera camera;
 
 //old version of FPS
 GLfloat deltaTime = 0.0f, lastime = 0.0f;
@@ -34,10 +34,10 @@ static const char* fragmentLocation = "./shaders/FragmentShader.glsl";
 
 void CreateTriangle() {
     GLfloat vertices[] = {
-        0.0f,  1.0f, 0.0f,  //vértice 0 (x,y,z)
-        1.0f, -1.0f, 0.0f,  //vértice 1 (x,y,z)
-       -1.0f, -1.0f, 0.0f,  //vértice 2 (x,y,z)
-        0.0f, -1.0f, 1.0f   //vértice 3 (x,y,z)
+        0.0f,  1.0f, 0.0f,   //Vértice 0 (x,y,z)
+        1.0f, -1.0f, 0.0f,   //Vértice 1 (x,y,z)
+       -1.0f, -1.0f, 0.0f,   //Vértice 2 (x,y,z)
+        0.0f, -1.0f, 1.0f    //Vértice 3 (x,y,z)
     };
 
     unsigned int indices[] = {
@@ -63,7 +63,7 @@ void CreateShader() {
 }
 
 int main() {
-    mainWindow = window(800, 600);
+    mainWindow = Window(800, 600);
     mainWindow.initialize();
 
     //criar o Triangulo
@@ -98,7 +98,7 @@ int main() {
         *********************************/
         shaderList[0].UseProgram(); //usar o programa
         glUniformMatrix4fv(shaderList[0].getUniformProjection(), 1, GL_FALSE, glm::value_ptr(projection)); //movimentação da projeção da camera
-        glUniformMatrix4fv(shaderList[0].getUniformView(), 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
+        glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
         
             /********************************
             * piramide 1

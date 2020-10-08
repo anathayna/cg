@@ -10,17 +10,16 @@
 #define camera_hpp
 
 #pragma once
-#include <stdio.h>
 #include <GL/glew.h>
-#include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-class camera {
+class Camera {
 public:
-    camera();
-    camera(glm::vec3 startPosition, glm::vec3 startWorldUp, GLfloat startYaw, GLfloat startPitch, GLfloat startMoveSpeed, GLfloat startTurnSpeed);
-    ~camera();
+    Camera();
+    Camera(glm::vec3 startPosition, glm::vec3 startWorldUp, GLfloat startYaw, GLfloat startPitch, GLfloat startMoveSpeed, GLfloat startTurnSpeed);
+    ~Camera();
 
     void keyControl(bool* keys, GLfloat deltaTime);
     void mouseControl(GLfloat xChange, GLfloat yChange, GLfloat deltaTime);
