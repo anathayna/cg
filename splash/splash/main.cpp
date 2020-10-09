@@ -6,6 +6,11 @@
 //  Copyright © 2020 Ana Thayna Franca. All rights reserved.
 //
 
+#ifndef STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_IMPLEMENTATION
+
+#include "stb_image.h"
+
 #include <stdio.h>
 #include <vector>
 
@@ -34,10 +39,10 @@ static const char* fragmentLocation = "./shaders/FragmentShader.glsl";
 
 void CreateTriangle() {
     GLfloat vertices[] = {
-        0.0f,  1.0f, 0.0f,   //Vértice 0 (x,y,z)
-        1.0f, -1.0f, 0.0f,   //Vértice 1 (x,y,z)
-       -1.0f, -1.0f, 0.0f,   //Vértice 2 (x,y,z)
-        0.0f, -1.0f, 1.0f    //Vértice 3 (x,y,z)
+        0.0f,  1.0f, 0.0f,   //vértice 0 (x,y,z)
+        1.0f, -1.0f, 0.0f,   //vértice 1 (x,y,z)
+       -1.0f, -1.0f, 0.0f,   //vértice 2 (x,y,z)
+        0.0f, -1.0f, 1.0f    //vértice 3 (x,y,z)
     };
 
     unsigned int indices[] = {
@@ -66,7 +71,7 @@ int main() {
     mainWindow = Window(800, 600);
     mainWindow.initialize();
 
-    //criar o Triangulo
+    //criar o triangulo
     CreateTriangle(); //coloca os dados na memória da placa de vídeo
     CreateShader(); //cria os Shaders
 
@@ -127,3 +132,5 @@ int main() {
 
     return 0;
 }
+
+#endif

@@ -15,6 +15,7 @@
 		36C5C10A24EF5B5300886F25 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C5C10924EF5B5300886F25 /* libGLEW.2.1.0.dylib */; };
 		36C5C10C24EF5B8E00886F25 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C5C10B24EF5B8E00886F25 /* libglfw.3.3.dylib */; };
 		36D546D62526991D006C02E6 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36D546D42526991D006C02E6 /* camera.cpp */; };
+		36FCC36E252FCF9100EE4AE8 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36FCC36C252FCF9100EE4AE8 /* texture.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,9 @@
 		36C5C10B24EF5B8E00886F25 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../usr/local/Cellar/glfw/3.3.2/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		36D546D42526991D006C02E6 /* camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		36D546D52526991D006C02E6 /* camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
+		36FCC36C252FCF9100EE4AE8 /* texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
+		36FCC36D252FCF9100EE4AE8 /* texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
+		36FCC372252FD97500EE4AE8 /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,10 +102,10 @@
 				364FC76B25178CDD00BB5219 /* shader.cpp */,
 				364FC76C25178CDD00BB5219 /* shader.hpp */,
 				364FC76F25178E9700BB5219 /* shaders */,
-				364B626D251D7B0400E20BB6 /* window.cpp */,
-				364B626E251D7B0400E20BB6 /* window.hpp */,
-				36D546D42526991D006C02E6 /* camera.cpp */,
-				36D546D52526991D006C02E6 /* camera.hpp */,
+				36FCC368252FCF4600EE4AE8 /* window */,
+				36FCC369252FCF5000EE4AE8 /* camera */,
+				36FCC36B252FCF7000EE4AE8 /* texture */,
+				36FCC372252FD97500EE4AE8 /* stb_image.h */,
 			);
 			path = splash;
 			sourceTree = "<group>";
@@ -114,6 +118,33 @@
 				36C5C10724EF5B2400886F25 /* OpenGL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		36FCC368252FCF4600EE4AE8 /* window */ = {
+			isa = PBXGroup;
+			children = (
+				364B626D251D7B0400E20BB6 /* window.cpp */,
+				364B626E251D7B0400E20BB6 /* window.hpp */,
+			);
+			path = window;
+			sourceTree = "<group>";
+		};
+		36FCC369252FCF5000EE4AE8 /* camera */ = {
+			isa = PBXGroup;
+			children = (
+				36D546D42526991D006C02E6 /* camera.cpp */,
+				36D546D52526991D006C02E6 /* camera.hpp */,
+			);
+			path = camera;
+			sourceTree = "<group>";
+		};
+		36FCC36B252FCF7000EE4AE8 /* texture */ = {
+			isa = PBXGroup;
+			children = (
+				36FCC36C252FCF9100EE4AE8 /* texture.cpp */,
+				36FCC36D252FCF9100EE4AE8 /* texture.hpp */,
+			);
+			path = texture;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +207,7 @@
 				364FC76D25178CDD00BB5219 /* shader.cpp in Sources */,
 				3622285D250AFC3000A20C5E /* mesh.cpp in Sources */,
 				36C5C0FF24EF5AA100886F25 /* main.cpp in Sources */,
+				36FCC36E252FCF9100EE4AE8 /* texture.cpp in Sources */,
 				364B626F251D7B0400E20BB6 /* window.cpp in Sources */,
 				36D546D62526991D006C02E6 /* camera.cpp in Sources */,
 			);

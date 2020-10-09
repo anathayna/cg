@@ -9,7 +9,6 @@
 #ifndef shader_hpp
 #define shader_hpp
 
-#pragma once
 #include <stdio.h>
 #include <string>
 #include <GL/glew.h>
