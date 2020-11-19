@@ -38,11 +38,11 @@ directionalLight mainLight;
 pointLight pointLights[MAX_POINT_LIGHTS];
 spotLight spotLights[MAX_SPOT_LIGHTS];
 
-Material metalMaterial;
-Material woodMaterial;
+material metalMaterial;
+material woodMaterial;
 
-Texture brickTexture;
-Texture dirtTexture;
+texture brickTexture;
+texture dirtTexture;
 
 //Old version of FPS
 GLfloat deltaTime = 0.0f, lastime = 0.0f;
@@ -106,21 +106,21 @@ void CreateTriangle() {
 
     calcAverageNormal(indices, 12, vertices, 32, 8, 5);
 
-    Mesh* obj1 = new Mesh();
+    mesh* obj1 = new mesh();
     obj1->CreateMesh(vertices, indices, 32, 12);
     meshList.push_back(obj1);
 
-    Mesh* obj2 = new Mesh();
+    mesh* obj2 = new mesh();
     obj2->CreateMesh(vertices, indices, 32, 12);
     meshList.push_back(obj2);
 
-    Mesh* obj3 = new Mesh();
+    mesh* obj3 = new mesh();
     obj3->CreateMesh(floorVertices, floorIndices, 32, 6);
     meshList.push_back(obj3);
 }
 
 void CreateShader() {
-    Shader* shader1 = new Shader();
+    shader* shader1 = new shader();
     shader1->CreateFromFile(vertexLocation, fragmentLocation);
     shaderList.push_back(*shader1);
 }
@@ -132,31 +132,31 @@ int main() {
     //Criar o Triangulo
     CreateTriangle(); //Coloca os dados na memória da placa de vídeo
     CreateShader(); //Cria os Shaders
-
-    camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 5.0f, 8.0f);
     
-    //Criando os materiais
-    metalMaterial = Material(1.0f, 32.0f);
-    woodMaterial = Material(0.3f, 4.0f);
+    camera = camera(glm::vec3 (0.0f, 0.0f, 0.0f), glm::vec3 (0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 5.0f, 8.0f);
+    
+    //criando os materiais
+    metalMaterial = material(1.0f, 32.0f);
+    woodMaterial = material(0.3f, 4.0f);
 
-    //Luz Principal
-    mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,        // rgb
+    //luz Principal
+    mainLight = directionalLight(1.0f, 1.0f, 1.0f,        // rgb
                                  0.3f, 0.4f,            // ambient | diffuse
                                  -8.0f, -8.0f, 2.0f);    // x,y,z
 
-    //Point Light
+    //point Light
     unsigned int pointLightCount = 0;
-    pointLights[0] = PointLight(0.0f, 1.0f, 0.0f,    // rgb
+    pointLights[0] = pointLight(0.0f, 1.0f, 0.0f,    // rgb
                                 0.5f, 1.0f,            // ambient | diffuse
                                 -2.0f, 1.0f, -2.0f,    // x,y,z
                                 0.3f, 0.2f, 0.1f);    // const, linear, exp
     pointLightCount++;
-    pointLights[1] = PointLight(0.0f, 0.0f, 1.0f,    // rgb
+    pointLights[1] = pointLight(0.0f, 0.0f, 1.0f,    // rgb
                                 0.5f, 1.0f,            // ambient | diffuse
                                 2.0f, 1.0f, -2.0f,    // x,y,z
                                 0.3f, 0.2f, 0.1f);    // const, linear, exp
     pointLightCount++;
-    pointLights[2] = PointLight(1.0f, 0.0f, 0.0f,    // rgb
+    pointLights[2] = pointLight(1.0f, 0.0f, 0.0f,    // rgb
                                 0.5f, 1.0f,            // ambient | diffuse
                                 0.0f, 1.0f, -2.0f,    // x,y,z
                                 0.3f, 0.2f, 0.1f);    // const, linear, exp
@@ -164,7 +164,7 @@ int main() {
 
     //Spot Light
     unsigned int spotLightCount = 0;
-    spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,            // rgb
+    spotLights[0] = spotLight(1.0f, 1.0f, 1.0f,            // rgb
                               0.5f, 0.5f,                // ambient | diffuse
                               0.0f, 1.0f, 5.0f,            // Position (x,y,z)
                               0.0f, -1.0f, 0.0f,        // Direction (x,y,z)
@@ -172,9 +172,9 @@ int main() {
     spotLightCount++;
 
     //Carrega as texturas
-    brickTexture = Texture((char*) ("Textures/brick.png"));
+    brickTexture = texture((char*) ("Textures/brick.png"));
     brickTexture.loadTexture();
-    dirtTexture = Texture((char*)("Textures/dirt.png"));
+    dirtTexture = texture((char*)("Textures/dirt.png"));
     dirtTexture.loadTexture();
 
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);

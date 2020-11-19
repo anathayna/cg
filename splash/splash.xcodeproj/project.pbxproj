@@ -10,6 +10,11 @@
 		3622285D250AFC3000A20C5E /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3622285B250AFC3000A20C5E /* mesh.cpp */; };
 		3643351F256729F5000F13AC /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3643351E256729F5000F13AC /* libGLEW.2.2.0.dylib */; };
 		3643352125672A17000F13AC /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3643352025672A17000F13AC /* libglfw.3.3.dylib */; };
+		3643352F256733DD000F13AC /* directionalLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3643352D256733DD000F13AC /* directionalLight.cpp */; };
+		3643353425673474000F13AC /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3643353225673474000F13AC /* light.cpp */; };
+		364335382567352B000F13AC /* pointLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 364335362567352B000F13AC /* pointLight.cpp */; };
+		3643353D256735D9000F13AC /* spotLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3643353B256735D9000F13AC /* spotLight.cpp */; };
+		364335412567365B000F13AC /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3643353F2567365B000F13AC /* material.cpp */; };
 		364B626F251D7B0400E20BB6 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 364B626D251D7B0400E20BB6 /* window.cpp */; };
 		364FC76D25178CDD00BB5219 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 364FC76B25178CDD00BB5219 /* shader.cpp */; };
 		36C5C0FF24EF5AA100886F25 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36C5C0FE24EF5AA100886F25 /* main.cpp */; };
@@ -38,6 +43,16 @@
 		364335262567323A000F13AC /* communValues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = communValues.h; sourceTree = "<group>"; };
 		36433529256732B4000F13AC /* dirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dirt.png; sourceTree = "<group>"; };
 		3643352A256732B4000F13AC /* brick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brick.png; sourceTree = "<group>"; };
+		3643352D256733DD000F13AC /* directionalLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = directionalLight.cpp; sourceTree = "<group>"; };
+		3643352E256733DD000F13AC /* directionalLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = directionalLight.hpp; sourceTree = "<group>"; };
+		3643353225673474000F13AC /* light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = light.cpp; sourceTree = "<group>"; };
+		3643353325673474000F13AC /* light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = light.hpp; sourceTree = "<group>"; };
+		364335362567352B000F13AC /* pointLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pointLight.cpp; sourceTree = "<group>"; };
+		364335372567352B000F13AC /* pointLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pointLight.hpp; sourceTree = "<group>"; };
+		3643353B256735D9000F13AC /* spotLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = spotLight.cpp; sourceTree = "<group>"; };
+		3643353C256735D9000F13AC /* spotLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = spotLight.hpp; sourceTree = "<group>"; };
+		3643353F2567365B000F13AC /* material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
+		364335402567365B000F13AC /* material.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = material.hpp; sourceTree = "<group>"; };
 		364B626D251D7B0400E20BB6 /* window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = window.cpp; sourceTree = "<group>"; };
 		364B626E251D7B0400E20BB6 /* window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = window.hpp; sourceTree = "<group>"; };
 		364FC76B25178CDD00BB5219 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
@@ -74,6 +89,14 @@
 		3643352B256732C9000F13AC /* light */ = {
 			isa = PBXGroup;
 			children = (
+				3643352D256733DD000F13AC /* directionalLight.cpp */,
+				3643352E256733DD000F13AC /* directionalLight.hpp */,
+				3643353225673474000F13AC /* light.cpp */,
+				3643353325673474000F13AC /* light.hpp */,
+				364335362567352B000F13AC /* pointLight.cpp */,
+				364335372567352B000F13AC /* pointLight.hpp */,
+				3643353B256735D9000F13AC /* spotLight.cpp */,
+				3643353C256735D9000F13AC /* spotLight.hpp */,
 			);
 			path = light;
 			sourceTree = "<group>";
@@ -81,6 +104,8 @@
 		3643352C25673302000F13AC /* material */ = {
 			isa = PBXGroup;
 			children = (
+				3643353F2567365B000F13AC /* material.cpp */,
+				364335402567365B000F13AC /* material.hpp */,
 			);
 			path = material;
 			sourceTree = "<group>";
@@ -232,7 +257,12 @@
 			files = (
 				364FC76D25178CDD00BB5219 /* shader.cpp in Sources */,
 				3622285D250AFC3000A20C5E /* mesh.cpp in Sources */,
+				3643353425673474000F13AC /* light.cpp in Sources */,
+				364335412567365B000F13AC /* material.cpp in Sources */,
+				3643352F256733DD000F13AC /* directionalLight.cpp in Sources */,
 				36C5C0FF24EF5AA100886F25 /* main.cpp in Sources */,
+				364335382567352B000F13AC /* pointLight.cpp in Sources */,
+				3643353D256735D9000F13AC /* spotLight.cpp in Sources */,
 				36FCC36E252FCF9100EE4AE8 /* texture.cpp in Sources */,
 				364B626F251D7B0400E20BB6 /* window.cpp in Sources */,
 				36D546D62526991D006C02E6 /* camera.cpp in Sources */,

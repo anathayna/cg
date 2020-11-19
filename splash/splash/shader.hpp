@@ -20,9 +20,9 @@
 #include <iostream>
 #include <fstream>
 
-#include "directionalLight.h"
-#include "pointLight.h"
-#include "spotLight.h"
+#include "directionalLight.hpp"
+#include "pointLight.hpp"
+#include "spotLight.hpp"
 
 class shader {
 public:
@@ -32,9 +32,9 @@ public:
     void CreateFromFile(const char* vertexLocation, const char* fragmentLocation);
     void UseProgram();
 
-    void setDirectionalLight(DirectionalLight *dLight);
-    void setPointLight(PointLight* pLight, unsigned int lightCount);
-    void setSpotLight(SpotLight* sLight, unsigned int lightCount);
+    void setDirectionalLight(directionalLight *dLight);
+    void setPointLight(pointLight* pLight, unsigned int lightCount);
+    void setSpotLight(spotLight* sLight, unsigned int lightCount);
 
     GLuint getUniformProjection() { return uniformProjection; };
     GLuint getUniformModel() { return uniformModel; };

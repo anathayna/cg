@@ -171,7 +171,7 @@ void shader::CompileShader(const char* vertexCode, const char* fragmentCode) {
     }
 }
 
-void Shader::AddShader(GLenum shaderType, const char* shaderCode) {
+void shader::AddShader(GLenum shaderType, const char* shaderCode) {
     //Começamos a compilar cada shader
     //1. Criar um shader
     GLuint shader = glCreateShader(shaderType);
@@ -201,13 +201,13 @@ void Shader::AddShader(GLenum shaderType, const char* shaderCode) {
     glAttachShader(shaderID, shader); //Anexa shader ao programa "variável global"
 }
 
-void shader::setDirectionalLight(DirectionalLight* dLight) {
+void shader::setDirectionalLight(directionalLight* dLight) {
     dLight->useLigth(uniformDirectionalLight.uniformAmbientIntensity, uniformDirectionalLight.uniformAmbientColor,
                      uniformDirectionalLight.uniformDiffuseIntensity, uniformDirectionalLight.uniformDirection);
 
 }
 
-void shader::setPointLight(PointLight* pLight, unsigned int lightCount) {
+void shader::setPointLight(pointLight* pLight, unsigned int lightCount) {
     if (lightCount > MAX_POINT_LIGHTS) lightCount = MAX_POINT_LIGHTS;
     glUniform1i(uniformPointLightCount, lightCount);
     for (int i = 0; i < lightCount; i++) {
@@ -217,7 +217,7 @@ void shader::setPointLight(PointLight* pLight, unsigned int lightCount) {
     }
 }
 
-void shader::setSpotLight(SpotLight* sLight, unsigned int lightCount) {
+void shader::setSpotLight(spotLight* sLight, unsigned int lightCount) {
     if (lightCount > MAX_SPOT_LIGHTS) lightCount = MAX_SPOT_LIGHTS;
     glUniform1i(uniformSpotLightCount, lightCount);
     for (int i = 0; i < lightCount; i++) {
