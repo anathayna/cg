@@ -30,21 +30,21 @@ spotLight::~spotLight() {
 void spotLight::useLigth(GLuint ambientIntensityLocation, GLuint ambientColorLocation,
                          GLuint diffuseIntensityLocation, GLuint positionLocation, GLuint directionalLocation,
                          GLuint constantLocation, GLuint linearLocation, GLuint exponentLocation, GLuint edgeLocation) {
-        //Ambiente
-        glUniform1f(ambientIntensityLocation, ambientIntensity); //Passa via uniform o valor de Intensidade
-        glUniform3f(ambientColorLocation, color.x, color.y, color.z); //Passa via uniform o valor de R/G/B
+        //ambiente
+        glUniform1f(ambientIntensityLocation, ambientIntensity); //passa via uniform o valor de Intensidade
+        glUniform3f(ambientColorLocation, color.x, color.y, color.z); //passa via uniform o valor de R/G/B
 
-        //Diffuse
-        glUniform1f(diffuseIntensityLocation, diffuseIntensity); //Passa via uniform o valor de Intensidade
-        glUniform3f(positionLocation, position.x, position.y, position.z); //Passa via uniform o valor de x,y,z
+        //diffuse
+        glUniform1f(diffuseIntensityLocation, diffuseIntensity); //passa via uniform o valor de Intensidade
+        glUniform3f(positionLocation, position.x, position.y, position.z); //passa via uniform o valor de x,y,z
         
-        glUniform3f(directionalLocation, direction.x, direction.y, direction.z); //Direção da luz
+        glUniform3f(directionalLocation, direction.x, direction.y, direction.z); //direção da luz
 
         glUniform1f(constantLocation, constant);
         glUniform1f(linearLocation, linear);
         glUniform1f(exponentLocation, exponent);
 
-        glUniform1f(edgeLocation, procEdge); //Raio da luz
+        glUniform1f(edgeLocation, procEdge); //raio da luz
 }
 
 void spotLight::SetFlash(glm::vec3 pos, glm::vec3 dir) {

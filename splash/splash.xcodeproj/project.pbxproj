@@ -151,8 +151,8 @@
 				36FCC36B252FCF7000EE4AE8 /* texture */,
 				3643352B256732C9000F13AC /* light */,
 				3643352C25673302000F13AC /* material */,
-				36FCC372252FD97500EE4AE8 /* stb_image.h */,
 				364335262567323A000F13AC /* communValues.h */,
+				36FCC372252FD97500EE4AE8 /* stb_image.h */,
 			);
 			path = splash;
 			sourceTree = "<group>";

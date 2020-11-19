@@ -32,7 +32,7 @@
 std::vector<mesh*> meshList;
 std::vector<shader> shaderList;
 Window mainWindow;
-camera camera;
+Camera camera;
 
 directionalLight mainLight;
 pointLight pointLights[MAX_POINT_LIGHTS];
@@ -44,7 +44,7 @@ material woodMaterial;
 texture brickTexture;
 texture dirtTexture;
 
-//Old version of FPS
+//old version of FPS
 GLfloat deltaTime = 0.0f, lastime = 0.0f;
 
 static const char* vertexLocation = "./shaders/VertexShader.glsl";
@@ -79,24 +79,24 @@ void calcAverageNormal(unsigned int* indices, unsigned int indiceCount,
 
 void CreateTriangle() {
     GLfloat vertices[] = {
-        0.0f, 1.0f, 0.0f,        0.5f, 1.0f,     0.0f, 0.0f, 0.0f, //Vértice 0 (x,y,z, u,v, nx,ny,nz)
-        1.0f, -1.0f, -0.6f,        1.0f, 0.0f,     0.0f, 0.0f, 0.0f, //Vértice 1 (x,y,z, u,v, nx,ny,nz)
-        -1.0f, -1.0f, -0.6f,    0.0f, 0.0f,     0.0f, 0.0f, 0.0f, //Vértice 2 (x,y,z, u,v, nx,ny,nz)
-        0.0f, -1.0f, 1.0f,        0.5f, 0.0f,     0.0f, 0.0f, 0.0f  //Vértice 3 (x,y,z, u,v, nx,ny,nz)
+        0.0f,  1.0f,  0.0f,    0.5f, 1.0f,     0.0f, 0.0f, 0.0f,     //vértice 0 (x,y,z, u,v, nx,ny,nz)
+        1.0f, -1.0f, -0.6f,    1.0f, 0.0f,     0.0f, 0.0f, 0.0f,     //vértice 1 (x,y,z, u,v, nx,ny,nz)
+       -1.0f, -1.0f, -0.6f,    0.0f, 0.0f,     0.0f, 0.0f, 0.0f,     //vértice 2 (x,y,z, u,v, nx,ny,nz)
+        0.0f, -1.0f,  1.0f,    0.5f, 0.0f,     0.0f, 0.0f, 0.0f      //vértice 3 (x,y,z, u,v, nx,ny,nz)
     };
 
     unsigned int indices[] = {
-        0,1,2, //Frente da pirâmide
-        0,1,3, //Parede lateral direita
-        0,2,3, //Parede lateral esquerda
-        1,2,3  //Base da pirâmide
+        0,1,2, //frente da pirâmide
+        0,1,3, //parede lateral direita
+        0,2,3, //parede lateral esquerda
+        1,2,3  //base da pirâmide
     };
 
     GLfloat floorVertices[] = {
-        -10.0, 0.0f, -10.0f,    0.0f, 0.0f,        0.0f, -1.0f, 0.0f,
-        10.0, 0.0f, -10.0f,        10.0f, 0.0f,    0.0f, -1.0f, 0.0f,
-        -10.0, 0.0f, 10.0f,        0.0f, 10.0f,    0.0f, -1.0f, 0.0f,
-        10.0, 0.0f, 10.0f,        10.0f, 10.0f,    0.0f, -1.0f, 0.0f,
+        -10.0, 0.0f, -10.0f,        0.0f,  0.0f,        0.0f, -1.0f, 0.0f,
+         10.0, 0.0f, -10.0f,        10.0f, 0.0f,        0.0f, -1.0f, 0.0f,
+        -10.0, 0.0f,  10.0f,        0.0f,  10.0f,       0.0f, -1.0f, 0.0f,
+         10.0, 0.0f,  10.0f,        10.0f, 10.0f,       0.0f, -1.0f, 0.0f,
     };
 
     unsigned int floorIndices[] = {
@@ -129,84 +129,84 @@ int main() {
     mainWindow = Window(1366, 768);
     mainWindow.initialize();
 
-    //Criar o Triangulo
-    CreateTriangle(); //Coloca os dados na memória da placa de vídeo
-    CreateShader(); //Cria os Shaders
+    //criar o triangulo
+    CreateTriangle(); //coloca os dados na memória da placa de vídeo
+    CreateShader(); //cria os shaders
     
-    camera = camera(glm::vec3 (0.0f, 0.0f, 0.0f), glm::vec3 (0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 5.0f, 8.0f);
+    camera = Camera(glm::vec3 (0.0f, 0.0f, 0.0f), glm::vec3 (0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 5.0f, 8.0f);
     
     //criando os materiais
     metalMaterial = material(1.0f, 32.0f);
     woodMaterial = material(0.3f, 4.0f);
 
     //luz Principal
-    mainLight = directionalLight(1.0f, 1.0f, 1.0f,        // rgb
+    mainLight = directionalLight(1.0f, 1.0f, 1.0f,      // rgb
                                  0.3f, 0.4f,            // ambient | diffuse
-                                 -8.0f, -8.0f, 2.0f);    // x,y,z
+                                 -8.0f, -8.0f, 2.0f);   // x,y,z
 
     //point Light
     unsigned int pointLightCount = 0;
-    pointLights[0] = pointLight(0.0f, 1.0f, 0.0f,    // rgb
-                                0.5f, 1.0f,            // ambient | diffuse
-                                -2.0f, 1.0f, -2.0f,    // x,y,z
+    pointLights[0] = pointLight(0.0f, 1.0f, 0.0f,     // rgb
+                                0.5f, 1.0f,           // ambient | diffuse
+                                -2.0f, 1.0f, -2.0f,   // x,y,z
                                 0.3f, 0.2f, 0.1f);    // const, linear, exp
     pointLightCount++;
-    pointLights[1] = pointLight(0.0f, 0.0f, 1.0f,    // rgb
-                                0.5f, 1.0f,            // ambient | diffuse
+    pointLights[1] = pointLight(0.0f, 0.0f, 1.0f,     // rgb
+                                0.5f, 1.0f,           // ambient | diffuse
                                 2.0f, 1.0f, -2.0f,    // x,y,z
                                 0.3f, 0.2f, 0.1f);    // const, linear, exp
     pointLightCount++;
-    pointLights[2] = pointLight(1.0f, 0.0f, 0.0f,    // rgb
-                                0.5f, 1.0f,            // ambient | diffuse
+    pointLights[2] = pointLight(1.0f, 0.0f, 0.0f,     // rgb
+                                0.5f, 1.0f,           // ambient | diffuse
                                 0.0f, 1.0f, -2.0f,    // x,y,z
                                 0.3f, 0.2f, 0.1f);    // const, linear, exp
     pointLightCount++;
 
-    //Spot Light
+    //spot Light
     unsigned int spotLightCount = 0;
-    spotLights[0] = spotLight(1.0f, 1.0f, 1.0f,            // rgb
-                              0.5f, 0.5f,                // ambient | diffuse
-                              0.0f, 1.0f, 5.0f,            // Position (x,y,z)
-                              0.0f, -1.0f, 0.0f,        // Direction (x,y,z)
-                              0.3f, 0.2f, 0.1f, 20.0f);    // const, linear, exp, Edge
+    spotLights[0] = spotLight(1.0f, 1.0f, 1.0f,             // rgb
+                              0.5f, 0.5f,                   // ambient | diffuse
+                              0.0f, 1.0f, 5.0f,             // position (x,y,z)
+                              0.0f, -1.0f, 0.0f,            // direction (x,y,z)
+                              0.3f, 0.2f, 0.1f, 20.0f);     // const, linear, exp, Edge
     spotLightCount++;
 
     //Carrega as texturas
-    brickTexture = texture((char*) ("Textures/brick.png"));
+    brickTexture = texture((char*) ("img_textures/brick.png"));
     brickTexture.loadTexture();
-    dirtTexture = texture((char*)("Textures/dirt.png"));
+    dirtTexture = texture((char*)("img_textures/dirt.png"));
     dirtTexture.loadTexture();
 
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
     while (!mainWindow.getWindowShouldClose()) {
-        //Old version of FPS
+        //old version of FPS
         GLfloat now = glfwGetTime();
         deltaTime = now - lastime;
         lastime = now;
 
-        //Ativa inputs e eventos
+        //ativa inputs e eventos
         glfwPollEvents();
 
-        //Controle do teclado
+        //controle do teclado
         camera.keyControl(mainWindow.getKeys(), deltaTime);
         camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange(), deltaTime);
 
         /********************************
-        * Cor de fundo da tela
+        * cor de fundo da tela
         *********************************/
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);//Limpa a janela, cor
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);//limpa a janela, cor
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         /********************************
-        * Piramides
+        * piramides
         *********************************/
         shaderList[0].UseProgram(); //Usar o programa
-        glUniformMatrix4fv(shaderList[0].getUniformProjection(), 1, GL_FALSE, glm::value_ptr(projection)); //Movimentação da projeção da camera
+        glUniformMatrix4fv(shaderList[0].getUniformProjection(), 1, GL_FALSE, glm::value_ptr(projection)); //movimentação da projeção da camera
         glUniformMatrix4fv(shaderList[0].getUniformView(), 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
         
             /********************************
-            * Luzes
+            * luzes
             *********************************/
             shaderList[0].setDirectionalLight(&mainLight);
             shaderList[0].setPointLight(pointLights, pointLightCount);
@@ -215,7 +215,7 @@ int main() {
             shaderList[0].setSpotLight(spotLights, spotLightCount);
 
             /********************************
-            * Piramide 1
+            * piramide 1
             *********************************/
             glm::mat4 model(1.0f); //cria uma matriz 4x4 e coloca os valores 1.0f em todas as posições
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f)); //traduz o modelo para movimentar a posição (x,y,z)
@@ -227,7 +227,7 @@ int main() {
             meshList[0]->RenderMesh();
 
             /********************************
-            * Piramide 2
+            * piramide 2
             *********************************/
             model = glm::mat4(1.0f); //cria uma matriz 4x4 colocando 1.0f em cada uma das posições
             model = glm::translate(model, glm::vec3(0.0f, 4.0f, -2.5f)); //traduz o modelo para movimentar a posição (x,y,z)
@@ -238,7 +238,7 @@ int main() {
             meshList[1]->RenderMesh();
 
             /********************************
-            * Chão
+            * chão
             *********************************/
             model = glm::mat4(1.0f); //cria uma matriz 4x4 colocando 1.0f em cada uma das posições
             model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f)); //traduz o modelo para movimentar a posição (x,y,z)
@@ -247,9 +247,9 @@ int main() {
             woodMaterial.useMaterial(shaderList[0].getUniformSpecularIntensity(), shaderList[0].getUniformShininess());
             meshList[2]->RenderMesh();
         
-        glUseProgram(0); //Removo o Programa da memória
+        glUseProgram(0); //removo o Programa da memória
 
-        //Atualiza a tela
+        //atualiza a tela
         mainWindow.swapBuffers();
     }
 
