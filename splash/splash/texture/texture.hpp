@@ -9,15 +9,16 @@
 #ifndef texture_hpp
 #define texture_hpp
 
+#pragma once
 #include <stdio.h>
 #include <GL/glew.h>
 #include "stb_image.h"
 
-class Texture {
+class texture {
 public:
-    Texture();
-    Texture(char* fileLoc);
-    ~Texture();
+    texture();
+    texture(char* fileLoc);
+    ~texture();
 
     void loadTexture();
     void useTexture();

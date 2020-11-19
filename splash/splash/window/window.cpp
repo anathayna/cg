@@ -97,24 +97,24 @@ void Window::swapBuffers() {
 }
 
 void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int mode) {
-    //eecebe o valor da classe transformando e convertendo para Window que foi gravada no glfwSetWindowUserPointer
+    //recebe o valor da classe transformando e convertendo para Window que foi gravada no glfwSetWindowUserPointer
     Window* theWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
     //se a tecla que tem a action "Apertada" e for o valor "ESQ"
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-        //enviar o comando de fechar a janela
+        //Enviar o comando de fechar a janela
         glfwSetWindowShouldClose(window, GL_TRUE);
         return;
     }
 
-    //garantir que somente as teclas até 1024 foram apertadas
+    //garatnir que somente as teclas até 1024 foram apertadas
     if (key >= 0 && key <= 1024) {
         if (action == GLFW_PRESS){
             theWindow->keys[key] = true;
-            printf("pressed: %d\n", key);
-        }else if(action == GLFW_RELEASE){
+            //printf("pressed: %d\n", key);
+        } else if(action == GLFW_RELEASE){
             theWindow->keys[key] = false;
-            printf("released: %d\n", key);
+            //printf("released: %d\n", key);
         }
     }
 }
@@ -133,7 +133,7 @@ void Window::handleMouse(GLFWwindow* window, double xPos, double yPos) {
     theWindow->lastX = xPos;
     theWindow->lastY = yPos;
 
-    printf("x:%.6f y:%.6f\n", theWindow->xChange, theWindow->yChange);
+    //printf("x:%.6f y:%.6f\n", theWindow->xChange, theWindow->yChange);
 }
 
 void Window::createCallbacks() {

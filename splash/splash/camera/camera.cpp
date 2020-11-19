@@ -8,7 +8,7 @@
 
 #include "camera.hpp"
 
-Camera::Camera(glm::vec3 startPosition, glm::vec3 startWorldUp, GLfloat startYaw, GLfloat startPitch, GLfloat startMoveSpeed, GLfloat startTurnSpeed) {
+camera::camera(glm::vec3 startPosition, glm::vec3 startWorldUp, GLfloat startYaw, GLfloat startPitch, GLfloat startMoveSpeed, GLfloat startTurnSpeed) {
     position = startPosition;
     worldUp = startWorldUp;
     yaw = startYaw;
@@ -21,7 +21,7 @@ Camera::Camera(glm::vec3 startPosition, glm::vec3 startWorldUp, GLfloat startYaw
     update();
 }
 
-void Camera::keyControl(bool* keys, GLfloat deltaTime) {
+void camera::keyControl(bool* keys, GLfloat deltaTime) {
     GLfloat velocity = deltaTime * moveSpeed;
 
     if (keys[GLFW_KEY_W] || keys[GLFW_KEY_UP]) {
@@ -38,7 +38,7 @@ void Camera::keyControl(bool* keys, GLfloat deltaTime) {
     }
 }
 
-void Camera::mouseControl(GLfloat xChange, GLfloat yChange, GLfloat deltaTime) {
+void camera::mouseControl(GLfloat xChange, GLfloat yChange, GLfloat deltaTime) {
     GLfloat velocity = deltaTime * trunSpeed;
 
     yaw += xChange * velocity;
@@ -52,7 +52,7 @@ void Camera::mouseControl(GLfloat xChange, GLfloat yChange, GLfloat deltaTime) {
     update();
 }
 
-void Camera::update() {
+void camera::update() {
     front.x = cos(glm::radians(yaw))* cos(glm::radians(pitch));
     front.y = sin(glm::radians(pitch));
     front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -62,9 +62,9 @@ void Camera::update() {
     up = glm::normalize(glm::cross(right, front));
 }
 
-glm::mat4 Camera::calculateViewMatrix() {
+glm::mat4 camera::calculateViewMatrix() {
     return glm::lookAt(position, position + front, up);
 }
 
-Camera::Camera(){}
-Camera::~Camera(){}
+camera::camera(){}
+camera::~camera(){}

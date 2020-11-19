@@ -9,6 +9,7 @@
 #ifndef mesh_hpp
 #define mesh_hpp
 
+#pragma once
 #include <stdio.h>
 #include <GL/glew.h>
 

@@ -9,6 +9,8 @@
 #ifndef window_hpp
 #define window_hpp
 
+#pragma once
+#include <stdio.h>
 #include <stdio.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
