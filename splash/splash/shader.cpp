@@ -87,15 +87,15 @@ void shader::CompileShader(const char* vertexCode, const char* fragmentCode) {
     }
     
     //6. Validação do programa
-    glValidateProgram(shaderID);
-    result = 0;
-    glGetProgramiv(shaderID, GL_VALIDATE_STATUS, &result); //Colocar o valor do o status da compilação na variável result
-    if (!result) {
-        GLchar log[1024] = { 0 };
-        glGetProgramInfoLog(shaderID, sizeof(log), NULL, log); //Busca o texto caso de algum erro na compilação
-        printf(" erro ao validar o programa: '%s'\n", log);
-        return;
-    }
+//    glValidateProgram(shaderID);
+//    result = 0;
+//    glGetProgramiv(shaderID, GL_VALIDATE_STATUS, &result); //colocar o valor do o status da compilação na variável result
+//    if (!result) {
+//        GLchar log[1024] = { 0 };
+//        glGetProgramInfoLog(shaderID, sizeof(log), NULL, log); //busca o texto caso de algum erro na compilação
+//        printf(" erro ao validar o programa: '%s'\n", log);
+//        return;
+//    }
 
     uniformProjection = glGetUniformLocation(shaderID, "projection"); //Procura a entrada chamada projection
     uniformModel = glGetUniformLocation(shaderID, "model"); //Procura a entrada chamada model

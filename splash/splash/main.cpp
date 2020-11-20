@@ -47,8 +47,8 @@ texture dirtTexture;
 //old version of FPS
 GLfloat deltaTime = 0.0f, lastime = 0.0f;
 
-static const char* vertexLocation = "./shaders/VertexShader.glsl";
-static const char* fragmentLocation = "./shaders/FragmentShader.glsl";
+static const char* vertexLocation = "/Users/anathayna/Documents/docs/senac-bcc/cg/splash/splash/shaders/VertexShader.glsl";
+static const char* fragmentLocation = "/Users/anathayna/Documents/docs/senac-bcc/cg/splash/splash/shaders/FragmentShader.glsl";
 
 void calcAverageNormal(unsigned int* indices, unsigned int indiceCount,
                        GLfloat* vertices, unsigned int verticeCount,
@@ -172,9 +172,9 @@ int main() {
     spotLightCount++;
 
     //Carrega as texturas
-    brickTexture = texture((char*) ("img_textures/brick.png"));
+    brickTexture = texture((char*) ("/Users/anathayna/Documents/docs/senac-bcc/cg/splash/splash/texture/brick.png"));
     brickTexture.loadTexture();
-    dirtTexture = texture((char*)("img_textures/dirt.png"));
+    dirtTexture = texture((char*)("/Users/anathayna/Documents/docs/senac-bcc/cg/splash/splash/texture/dirt.png"));
     dirtTexture.loadTexture();
 
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
