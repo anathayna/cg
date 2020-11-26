@@ -78,29 +78,29 @@ void calcAverageNormal(unsigned int* indices, unsigned int indiceCount,
 
 void CreateTriangle() {
     GLfloat vertices[] = {
-        1.0f,  0.0f, -1.0f,    0.0f,  0.0f,     0.0f, -1.0f, 0.0f,     // vértice 0 (x,y,z, u,v, nx,ny,nz)
-        1.0f,  0.0f,  1.0f,   10.0f,  0.0f,     0.0f, -1.0f, 0.0f,     // vértice 1 (x,y,z, u,v, nx,ny,nz)
-       -1.0f,  0.0f,  1.0f,    0.0f, 10.0f,     0.0f, -1.0f, 0.0f,     // vértice 2 (x,y,z, u,v, nx,ny,nz)
-       -1.0f,  0.0f, -1.0f,   10.0f, 10.0f,     0.0f, -1.0f, 0.0f,     // vértice 3 (x,y,z, u,v, nx,ny,nz)
+        1.0f,  0.0f, -1.0f,    0.0f,   0.0f,     0.0f, -1.0f, 0.0f,    // vértice 0 (x,y,z, u,v, nx,ny,nz)
+        1.0f,  0.0f,  1.0f,   10.0f,   0.0f,     0.0f, -1.0f, 0.0f,    // vértice 1 (x,y,z, u,v, nx,ny,nz)
+       -1.0f,  0.0f,  1.0f,    0.0f,  10.0f,     0.0f, -1.0f, 0.0f,    // vértice 2 (x,y,z, u,v, nx,ny,nz)
+       -1.0f,  0.0f, -1.0f,   10.0f,  10.0f,     0.0f, -1.0f, 0.0f,    // vértice 3 (x,y,z, u,v, nx,ny,nz)
         
-        1.0f,  1.0f, -1.0f,    0.0f,   0.0f,     0.0f, -1.0f, 0.0f,    // vértice 4 (x,y,z, u,v, nx,ny,nz)
-        1.0f,  1.0f,  1.0f,   10.0f,   0.0f,     0.0f, -1.0f, 0.0f,    // vértice 5 (x,y,z, u,v, nx,ny,nz)
-       -1.0f,  1.0f,  1.0f,    0.0f,  10.0f,     0.0f, -1.0f, 0.0f,    // vértice 6 (x,y,z, u,v, nx,ny,nz)
-       -1.0f,  1.0f, -1.0f,   10.0f,  10.0f,     0.0f, -1.0f, 0.0f     // vértice 7 (x,y,z, u,v, nx,ny,nz)
+        1.0f,  1.0f, -1.0f,    0.0f,   0.0f,    0.0f, -1.0f, 0.0f,     // vértice 4 (x,y,z, u,v, nx,ny,nz)
+        1.0f,  1.0f,  1.0f,   10.0f,   0.0f,    0.0f, -1.0f, 0.0f,     // vértice 5 (x,y,z, u,v, nx,ny,nz)
+       -1.0f,  1.0f,  1.0f,    0.0f,  10.0f,    0.0f, -1.0f, 0.0f,     // vértice 6 (x,y,z, u,v, nx,ny,nz)
+       -1.0f,  1.0f, -1.0f,   10.0f,  10.0f,    0.0f, -1.0f, 0.0f      // vértice 7 (x,y,z, u,v, nx,ny,nz)
     };
 
     unsigned int indices[] = {
-        0,1,2,  // frente da pirâmide
-        2,0,3,  // parede lateral direita
-        0,1,5,  // parede lateral esquerda
-        5,4,0,  // base da pirâmide
-        5,4,7,
+        0,1,2,  // primeiro triângulo
+        2,0,3,
+        0,1,5,  // segundo triângulo
+        5,4,0,
+        5,4,7,  // terceiro triângulo
         7,5,6,
-        0,4,7,
+        0,4,7,  // quarto triângulo
         7,3,0,
-        7,3,6,
+        7,3,6,  // quinto triângulo
         6,3,2,
-        2,1,5,
+        2,1,5,  // sexto triângulo
         5,6,2
         
     };

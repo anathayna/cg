@@ -18,13 +18,12 @@ directionalLight::directionalLight(GLfloat red, GLfloat green, GLfloat blue, GLf
 
 void directionalLight::useLigth(GLuint ambientIntensityLocation, GLuint ambientColorLocation,
     GLuint diffuseIntensityLocation, GLuint directionLocation) {
-    //ambiente
-    glUniform1f(ambientIntensityLocation, ambientIntensity); //passa via uniform o valor de Intensidade
-    glUniform3f(ambientColorLocation, color.x, color.y, color.z); //passa via uniform o valor de R/G/B
+    
+    glUniform1f(ambientIntensityLocation, ambientIntensity);
+    glUniform3f(ambientColorLocation, color.x, color.y, color.z);
 
-    //diffuse
-    glUniform1f(diffuseIntensityLocation, diffuseIntensity); //passa via uniform o valor de Intensidade
-    glUniform3f(directionLocation, direction.x, direction.y, direction.z); //passa via uniform o valor de x,y,z
+    glUniform1f(diffuseIntensityLocation, diffuseIntensity);
+    glUniform3f(directionLocation, direction.x, direction.y, direction.z); 
 }
 
 directionalLight::~directionalLight() {

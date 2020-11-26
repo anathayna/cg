@@ -24,30 +24,29 @@ texture::texture(char* fileLoc) {
 }
 
 void texture::loadTexture() {
-    unsigned char* texData = stbi_load(fileLocation, &width, &height, &bitDepth, 0); //carrega o arquivo na memória
+    unsigned char* texData = stbi_load(fileLocation, &width, &height, &bitDepth, 0);
     if (!texData) {
         printf("fail to load image %s\n", fileLocation);
     }
 
-    glGenTextures(1, &textureID); //gera uma textura e retorna o ID
-    glBindTexture(GL_TEXTURE_2D, textureID); //bind da textura na memória
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
 
-        //filtros da imagem
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); //GL_REPEAT para o eixo X
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT); //GL_REPEAT para o eixo Y
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); //remover os pixels se estiver muito perto
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); //remover os pixels se estiver longe
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData); //cria a imagem na placa de vídeo
-        glGenerateMipmap(GL_TEXTURE_2D); //cria os MipMap
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+        glGenerateMipmap(GL_TEXTURE_2D);
 
-    glBindTexture(GL_TEXTURE_2D, 0); //limpa a textura da memória
-    stbi_image_free(texData); //limpa o arquivo lido da memória
+    glBindTexture(GL_TEXTURE_2D, 0);
+    stbi_image_free(texData);
 }
 
 void texture::useTexture() {
-    glActiveTexture(GL_TEXTURE0); //ativa a textura no nível 0
-    glBindTexture(GL_TEXTURE_2D, textureID); //bind da textura na memória
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textureID); 
 }
 
 void texture::clearTexture() {

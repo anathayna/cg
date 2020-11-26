@@ -32,13 +32,11 @@ void pointLight::useLigth(GLuint ambientIntensityLocation, GLuint ambientColorLo
     GLuint diffuseIntensityLocation, GLuint positionLocation,
     GLuint constantLocation, GLuint linearLocation, GLuint exponentLocation) {
 
-    //ambiente
-    glUniform1f(ambientIntensityLocation, ambientIntensity); //passa via uniform o valor de Intensidade
-    glUniform3f(ambientColorLocation, color.x, color.y, color.z); //passa via uniform o valor de R/G/B
-
-    //diffuse
-    glUniform1f(diffuseIntensityLocation, diffuseIntensity); //passa via uniform o valor de Intensidade
-    glUniform3f(positionLocation, position.x, position.y, position.z); //passa via uniform o valor de x,y,z
+    glUniform1f(ambientIntensityLocation, ambientIntensity);
+    glUniform3f(ambientColorLocation, color.x, color.y, color.z);
+    
+    glUniform1f(diffuseIntensityLocation, diffuseIntensity);
+    glUniform3f(positionLocation, position.x, position.y, position.z); 
 
     glUniform1f(constantLocation, constant);
     glUniform1f(linearLocation, linear);

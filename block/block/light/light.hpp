@@ -20,11 +20,8 @@ public:
     ~light();
 
 protected:
-    //ambiente
     glm::vec3 color;
     GLfloat ambientIntensity;
-
-    //diffuse
     GLfloat diffuseIntensity;
 };
 

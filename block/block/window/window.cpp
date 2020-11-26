@@ -34,19 +34,15 @@ Window::~Window() {
 }
 
 int Window::initialize() {
-    //INICIALIZAR O GLFW
     if (!glfwInit()) {
         printf("GLFW nao foi inicializado");
         glfwTerminate();
         return 1;
     };
 
-    //GLFW OpenGL Version
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    //Core Profile
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    //Forward Functions
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     mainWindow = glfwCreateWindow(width, height, "block", NULL, NULL);
@@ -56,19 +52,12 @@ int Window::initialize() {
         return 1;
     }
 
-    //pegar o buffer size da largura e altura
     glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
-
-    //configurando a janela principal
     glfwMakeContextCurrent(mainWindow);
-
-    //associa as funções de callback de teclado e mouse
     createCallbacks();
 
-    //desabilitar o cursor do mouse
     glfwSetInputMode(mainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    //GLEW
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK) {
         printf("Glew nao foi iniciado");
@@ -77,15 +66,8 @@ int Window::initialize() {
         return 1;
     };
 
-    glEnable(GL_DEPTH_TEST); //habilitar o Depth Test
-
-    //configurando viewport
+    glEnable(GL_DEPTH_TEST);
     glViewport(0, 0, bufferWidth, bufferHeight);
-
-    /**
-    * define no GLFW que a classe associada a essa window é essa (this),
-    * para utilizar as funções estaticas de teclado
-    */
     glfwSetWindowUserPointer(mainWindow, this);
 
     return 0;
@@ -96,17 +78,13 @@ void Window::swapBuffers() {
 }
 
 void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int mode) {
-    //recebe o valor da classe transformando e convertendo para Window que foi gravada no glfwSetWindowUserPointer
     Window* theWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
-    //se a tecla que tem a action "Apertada" e for o valor "ESQ"
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-        //Enviar o comando de fechar a janela
         glfwSetWindowShouldClose(window, GL_TRUE);
         return;
     }
 
-    //garatnir que somente as teclas até 1024 foram apertadas
     if (key >= 0 && key <= 1024) {
         if (action == GLFW_PRESS){
             theWindow->keys[key] = true;
