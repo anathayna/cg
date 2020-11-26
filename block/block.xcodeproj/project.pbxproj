@@ -8,6 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		3632CA442567439800286C71 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3632CA432567439800286C71 /* main.cpp */; };
+		3636D99525705598006308C4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3636D99425705598006308C4 /* OpenGL.framework */; };
+		3636D9972570566C006308C4 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3636D9962570566C006308C4 /* libglfw.3.3.dylib */; };
+		3636D99A2570568A006308C4 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3636D9992570568A006308C4 /* libGLEW.2.2.0.dylib */; };
+		3636D9A0257058B1006308C4 /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3636D99E257058B1006308C4 /* mesh.cpp */; };
+		3636D9AA2570594D006308C4 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3636D9A82570594D006308C4 /* shader.cpp */; };
+		3636D9B125705A2E006308C4 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3636D9AF25705A2E006308C4 /* window.cpp */; };
+		3636D9B525705A67006308C4 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3636D9B325705A67006308C4 /* camera.cpp */; };
+		3636D9B925705AA5006308C4 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3636D9B725705AA5006308C4 /* texture.cpp */; };
+		3636D9C025705F8E006308C4 /* directionalLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3636D9BE25705F8E006308C4 /* directionalLight.cpp */; };
+		3636D9C525705FBC006308C4 /* pointLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3636D9C325705FBC006308C4 /* pointLight.cpp */; };
+		3636D9C925705FE9006308C4 /* spotLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3636D9C725705FE9006308C4 /* spotLight.cpp */; };
+		3636D9CD25706013006308C4 /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3636D9CB25706013006308C4 /* light.cpp */; };
+		3636D9D125706055006308C4 /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3636D9CF25706055006308C4 /* material.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +38,35 @@
 /* Begin PBXFileReference section */
 		3632CA402567439800286C71 /* block */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = block; sourceTree = BUILT_PRODUCTS_DIR; };
 		3632CA432567439800286C71 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3636D99425705598006308C4 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		3636D9962570566C006308C4 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../../../usr/local/Cellar/glfw/3.3.2/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
+		3636D9992570568A006308C4 /* libGLEW.2.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.2.0.dylib; path = ../../../../../../../usr/local/Cellar/glew/2.2.0/lib/libGLEW.2.2.0.dylib; sourceTree = "<group>"; };
+		3636D99E257058B1006308C4 /* mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
+		3636D99F257058B1006308C4 /* mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
+		3636D9A82570594D006308C4 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
+		3636D9A92570594D006308C4 /* shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shader.hpp; sourceTree = "<group>"; };
+		3636D9AD257059F9006308C4 /* FragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FragmentShader.glsl; sourceTree = "<group>"; };
+		3636D9AE257059F9006308C4 /* VertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VertexShader.glsl; sourceTree = "<group>"; };
+		3636D9AF25705A2E006308C4 /* window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = window.cpp; sourceTree = "<group>"; };
+		3636D9B025705A2E006308C4 /* window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = window.hpp; sourceTree = "<group>"; };
+		3636D9B325705A67006308C4 /* camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		3636D9B425705A67006308C4 /* camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
+		3636D9B725705AA5006308C4 /* texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
+		3636D9B825705AA5006308C4 /* texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
+		3636D9BB25705ADB006308C4 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		3636D9BC25705E34006308C4 /* brick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brick.png; sourceTree = "<group>"; };
+		3636D9BD25705E34006308C4 /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block.png; sourceTree = "<group>"; };
+		3636D9BE25705F8E006308C4 /* directionalLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = directionalLight.cpp; sourceTree = "<group>"; };
+		3636D9BF25705F8E006308C4 /* directionalLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = directionalLight.hpp; sourceTree = "<group>"; };
+		3636D9C325705FBC006308C4 /* pointLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pointLight.cpp; sourceTree = "<group>"; };
+		3636D9C425705FBC006308C4 /* pointLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pointLight.hpp; sourceTree = "<group>"; };
+		3636D9C725705FE9006308C4 /* spotLight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = spotLight.cpp; sourceTree = "<group>"; };
+		3636D9C825705FE9006308C4 /* spotLight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = spotLight.hpp; sourceTree = "<group>"; };
+		3636D9CB25706013006308C4 /* light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = light.cpp; sourceTree = "<group>"; };
+		3636D9CC25706013006308C4 /* light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = light.hpp; sourceTree = "<group>"; };
+		3636D9CF25706055006308C4 /* material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
+		3636D9D025706055006308C4 /* material.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = material.hpp; sourceTree = "<group>"; };
+		3636D9D32570608B006308C4 /* communValues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = communValues.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +74,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3636D99A2570568A006308C4 /* libGLEW.2.2.0.dylib in Frameworks */,
+				3636D9972570566C006308C4 /* libglfw.3.3.dylib in Frameworks */,
+				3636D99525705598006308C4 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +88,7 @@
 			children = (
 				3632CA422567439800286C71 /* block */,
 				3632CA412567439800286C71 /* Products */,
+				3636D99325705598006308C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +104,92 @@
 			isa = PBXGroup;
 			children = (
 				3632CA432567439800286C71 /* main.cpp */,
+				3636D99E257058B1006308C4 /* mesh.cpp */,
+				3636D99F257058B1006308C4 /* mesh.hpp */,
+				3636D9A82570594D006308C4 /* shader.cpp */,
+				3636D9A92570594D006308C4 /* shader.hpp */,
+				3636D9BB25705ADB006308C4 /* stb_image.h */,
+				3636D9D32570608B006308C4 /* communValues.h */,
+				3636D9A2257058BC006308C4 /* shaders */,
+				3636D9A3257058C8006308C4 /* window */,
+				3636D9A4257058D7006308C4 /* camera */,
+				3636D9A5257058E0006308C4 /* texture */,
+				3636D9A7257058F3006308C4 /* material */,
+				3636D9A6257058E9006308C4 /* light */,
 			);
 			path = block;
+			sourceTree = "<group>";
+		};
+		3636D99325705598006308C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3636D9992570568A006308C4 /* libGLEW.2.2.0.dylib */,
+				3636D9962570566C006308C4 /* libglfw.3.3.dylib */,
+				3636D99425705598006308C4 /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3636D9A2257058BC006308C4 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				3636D9AD257059F9006308C4 /* FragmentShader.glsl */,
+				3636D9AE257059F9006308C4 /* VertexShader.glsl */,
+			);
+			path = shaders;
+			sourceTree = "<group>";
+		};
+		3636D9A3257058C8006308C4 /* window */ = {
+			isa = PBXGroup;
+			children = (
+				3636D9AF25705A2E006308C4 /* window.cpp */,
+				3636D9B025705A2E006308C4 /* window.hpp */,
+			);
+			path = window;
+			sourceTree = "<group>";
+		};
+		3636D9A4257058D7006308C4 /* camera */ = {
+			isa = PBXGroup;
+			children = (
+				3636D9B325705A67006308C4 /* camera.cpp */,
+				3636D9B425705A67006308C4 /* camera.hpp */,
+			);
+			path = camera;
+			sourceTree = "<group>";
+		};
+		3636D9A5257058E0006308C4 /* texture */ = {
+			isa = PBXGroup;
+			children = (
+				3636D9BD25705E34006308C4 /* block.png */,
+				3636D9BC25705E34006308C4 /* brick.png */,
+				3636D9B725705AA5006308C4 /* texture.cpp */,
+				3636D9B825705AA5006308C4 /* texture.hpp */,
+			);
+			path = texture;
+			sourceTree = "<group>";
+		};
+		3636D9A6257058E9006308C4 /* light */ = {
+			isa = PBXGroup;
+			children = (
+				3636D9BE25705F8E006308C4 /* directionalLight.cpp */,
+				3636D9BF25705F8E006308C4 /* directionalLight.hpp */,
+				3636D9C325705FBC006308C4 /* pointLight.cpp */,
+				3636D9C425705FBC006308C4 /* pointLight.hpp */,
+				3636D9C725705FE9006308C4 /* spotLight.cpp */,
+				3636D9C825705FE9006308C4 /* spotLight.hpp */,
+				3636D9CB25706013006308C4 /* light.cpp */,
+				3636D9CC25706013006308C4 /* light.hpp */,
+			);
+			path = light;
+			sourceTree = "<group>";
+		};
+		3636D9A7257058F3006308C4 /* material */ = {
+			isa = PBXGroup;
+			children = (
+				3636D9CF25706055006308C4 /* material.cpp */,
+				3636D9D025706055006308C4 /* material.hpp */,
+			);
+			path = material;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +248,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3636D9AA2570594D006308C4 /* shader.cpp in Sources */,
+				3636D9C925705FE9006308C4 /* spotLight.cpp in Sources */,
+				3636D9C525705FBC006308C4 /* pointLight.cpp in Sources */,
+				3636D9D125706055006308C4 /* material.cpp in Sources */,
+				3636D9A0257058B1006308C4 /* mesh.cpp in Sources */,
+				3636D9C025705F8E006308C4 /* directionalLight.cpp in Sources */,
 				3632CA442567439800286C71 /* main.cpp in Sources */,
+				3636D9B925705AA5006308C4 /* texture.cpp in Sources */,
+				3636D9B125705A2E006308C4 /* window.cpp in Sources */,
+				3636D9CD25706013006308C4 /* light.cpp in Sources */,
+				3636D9B525705A67006308C4 /* camera.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +380,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					/Users/anathayna/glm/,
+					/usr/local/include/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.2/lib,
+					/usr/local/Cellar/glew/2.2.0/lib,
+					/usr/local/Cellar/glew/2.1.0_1/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -248,6 +398,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					/Users/anathayna/glm/,
+					/usr/local/include/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw/3.3.2/lib,
+					/usr/local/Cellar/glew/2.2.0/lib,
+					/usr/local/Cellar/glew/2.1.0_1/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
