@@ -44,7 +44,6 @@ material woodMaterial;
 texture brickTexture;
 texture dirtTexture;
 
-//old version of FPS
 GLfloat deltaTime = 0.0f, lastime = 0.0f;
 
 static const char* vertexLocation = "/Users/anathayna/Documents/docs/senac-bcc/cg/block/block/shaders/VertexShader.glsl";
@@ -79,17 +78,31 @@ void calcAverageNormal(unsigned int* indices, unsigned int indiceCount,
 
 void CreateTriangle() {
     GLfloat vertices[] = {
-        0.0f,  1.0f,  0.0f,    0.5f, 1.0f,     0.0f, 0.0f, 0.0f,     //vértice 0 (x,y,z, u,v, nx,ny,nz)
-        1.0f, -1.0f, -0.6f,    1.0f, 0.0f,     0.0f, 0.0f, 0.0f,     //vértice 1 (x,y,z, u,v, nx,ny,nz)
-       -1.0f, -1.0f, -0.6f,    0.0f, 0.0f,     0.0f, 0.0f, 0.0f,     //vértice 2 (x,y,z, u,v, nx,ny,nz)
-        0.0f, -1.0f,  1.0f,    0.5f, 0.0f,     0.0f, 0.0f, 0.0f      //vértice 3 (x,y,z, u,v, nx,ny,nz)
+        1.0f,  0.0f, -1.0f,    0.0f,  0.0f,     0.0f, -1.0f, 0.0f,     // vértice 0 (x,y,z, u,v, nx,ny,nz)
+        1.0f,  0.0f,  1.0f,   10.0f,  0.0f,     0.0f, -1.0f, 0.0f,     // vértice 1 (x,y,z, u,v, nx,ny,nz)
+       -1.0f,  0.0f,  1.0f,    0.0f, 10.0f,     0.0f, -1.0f, 0.0f,     // vértice 2 (x,y,z, u,v, nx,ny,nz)
+       -1.0f,  0.0f, -1.0f,   10.0f, 10.0f,     0.0f, -1.0f, 0.0f,     // vértice 3 (x,y,z, u,v, nx,ny,nz)
+        
+        1.0f,  1.0f, -1.0f,    0.0f,   0.0f,     0.0f, -1.0f, 0.0f,    // vértice 4 (x,y,z, u,v, nx,ny,nz)
+        1.0f,  1.0f,  1.0f,   10.0f,   0.0f,     0.0f, -1.0f, 0.0f,    // vértice 5 (x,y,z, u,v, nx,ny,nz)
+       -1.0f,  1.0f,  1.0f,    0.0f,  10.0f,     0.0f, -1.0f, 0.0f,    // vértice 6 (x,y,z, u,v, nx,ny,nz)
+       -1.0f,  1.0f, -1.0f,   10.0f,  10.0f,     0.0f, -1.0f, 0.0f     // vértice 7 (x,y,z, u,v, nx,ny,nz)
     };
 
     unsigned int indices[] = {
-        0,1,2, //frente da pirâmide
-        0,1,3, //parede lateral direita
-        0,2,3, //parede lateral esquerda
-        1,2,3  //base da pirâmide
+        0,1,2,  // frente da pirâmide
+        2,0,3,  // parede lateral direita
+        0,1,5,  // parede lateral esquerda
+        5,4,0,  // base da pirâmide
+        5,4,7,
+        7,5,6,
+        0,4,7,
+        7,3,0,
+        7,3,6,
+        6,3,2,
+        2,1,5,
+        5,6,2
+        
     };
 
     GLfloat floorVertices[] = {
@@ -129,22 +142,22 @@ int main() {
     mainWindow = Window(1366, 768);
     mainWindow.initialize();
 
-    //criar o triangulo
-    CreateTriangle(); //coloca os dados na memória da placa de vídeo
-    CreateShader(); //cria os shaders
+    // criar o triangulo
+    CreateTriangle(); // coloca os dados na memória da placa de vídeo
+    CreateShader(); // cria os shaders
     
     camera = Camera(glm::vec3 (0.0f, 0.0f, 0.0f), glm::vec3 (0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 5.0f, 8.0f);
     
-    //criando os materiais
+    // criando os materiais
     metalMaterial = material(1.0f, 32.0f);
     woodMaterial = material(0.3f, 4.0f);
 
-    //luz Principal
+    // luz principal
     mainLight = directionalLight(1.0f, 1.0f, 1.0f,      // rgb
                                  0.3f, 0.4f,            // ambient | diffuse
                                  -8.0f, -8.0f, 2.0f);   // x,y,z
 
-    //point Light
+    // point light
     unsigned int pointLightCount = 0;
     pointLights[0] = pointLight(0.0f, 1.0f, 0.0f,     // rgb
                                 0.5f, 1.0f,           // ambient | diffuse
@@ -162,7 +175,7 @@ int main() {
                                 0.3f, 0.2f, 0.1f);    // const, linear, exp
     pointLightCount++;
 
-    //spot Light
+    // spot light
     unsigned int spotLightCount = 0;
     spotLights[0] = spotLight(1.0f, 1.0f, 1.0f,             // rgb
                               0.5f, 0.5f,                   // ambient | diffuse
@@ -171,7 +184,7 @@ int main() {
                               0.3f, 0.2f, 0.1f, 20.0f);     // const, linear, exp, Edge
     spotLightCount++;
 
-    //Carrega as texturas
+    // carrega as texturas
     brickTexture = texture((char*) ("/Users/anathayna/Documents/docs/senac-bcc/cg/block/block/texture/block.png"));
     brickTexture.loadTexture();
     dirtTexture = texture((char*)("/Users/anathayna/Documents/docs/senac-bcc/cg/block/block/texture/brick.png"));
@@ -180,29 +193,29 @@ int main() {
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
     while (!mainWindow.getWindowShouldClose()) {
-        //old version of FPS
+        // old version of FPS
         GLfloat now = glfwGetTime();
         deltaTime = now - lastime;
         lastime = now;
 
-        //ativa inputs e eventos
+        // ativa inputs e eventos
         glfwPollEvents();
 
-        //controle do teclado
+        // controle do teclado
         camera.keyControl(mainWindow.getKeys(), deltaTime);
         camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange(), deltaTime);
 
         /********************************
         * cor de fundo da tela
         *********************************/
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);//limpa a janela, cor
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);// limpa a janela
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         /********************************
-        * piramides
+        * cubo
         *********************************/
-        shaderList[0].UseProgram(); //Usar o programa
-        glUniformMatrix4fv(shaderList[0].getUniformProjection(), 1, GL_FALSE, glm::value_ptr(projection)); //movimentação da projeção da camera
+        shaderList[0].UseProgram(); // usar o programa
+        glUniformMatrix4fv(shaderList[0].getUniformProjection(), 1, GL_FALSE, glm::value_ptr(projection)); // movimentação da projeção da camera
         glUniformMatrix4fv(shaderList[0].getUniformView(), 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
         
             /********************************
@@ -210,28 +223,22 @@ int main() {
             *********************************/
             shaderList[0].setDirectionalLight(&mainLight);
             shaderList[0].setPointLight(pointLights, pointLightCount);
-            //Atualizar a posição da lanterna
+            
+            // atualiza a posição da lanterna
             spotLights[0].SetFlash(camera.getCameraPosition(), camera.getCameraDirection());
             shaderList[0].setSpotLight(spotLights, spotLightCount);
 
             /********************************
-            * piramide 1
+            * model
             *********************************/
-            glm::mat4 model(1.0f); //cria uma matriz 4x4 e coloca os valores 1.0f em todas as posições
-            model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f)); //traduz o modelo para movimentar a posição (x,y,z)
-            //model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
-            //model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-            glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
-            brickTexture.useTexture();
-            metalMaterial.useMaterial(shaderList[0].getUniformSpecularIntensity(), shaderList[0].getUniformShininess());
-            meshList[0]->RenderMesh();
+            glm::mat4 model(1.0f); // cria uma matriz 4x4 e coloca os valores 1.0f em todas as posições
+            model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f)); // traduz o modelo para movimentar a posição (x,y,z)
 
             /********************************
-            * piramide 2
+            * cubo
             *********************************/
-            model = glm::mat4(1.0f); //cria uma matriz 4x4 colocando 1.0f em cada uma das posições
-            model = glm::translate(model, glm::vec3(0.0f, 4.0f, -2.5f)); //traduz o modelo para movimentar a posição (x,y,z)
-            //model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+            model = glm::mat4(1.0f); // cria uma matriz 4x4 colocando 1.0f em cada uma das posições
+            model = glm::translate(model, glm::vec3(0.0f, 4.0f, -2.5f)); // traduz o modelo para movimentar a posição (x,y,z)
             glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
             brickTexture.useTexture();
             metalMaterial.useMaterial(shaderList[0].getUniformSpecularIntensity(), shaderList[0].getUniformShininess());
@@ -240,16 +247,16 @@ int main() {
             /********************************
             * chão
             *********************************/
-            model = glm::mat4(1.0f); //cria uma matriz 4x4 colocando 1.0f em cada uma das posições
-            model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f)); //traduz o modelo para movimentar a posição (x,y,z)
+            model = glm::mat4(1.0f); // cria uma matriz 4x4 colocando 1.0f em cada uma das posições
+            model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f)); // traduz o modelo para movimentar a posição (x,y,z)
             glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
             dirtTexture.useTexture();
             woodMaterial.useMaterial(shaderList[0].getUniformSpecularIntensity(), shaderList[0].getUniformShininess());
             meshList[2]->RenderMesh();
         
-        glUseProgram(0); //removo o Programa da memória
+        glUseProgram(0); //removo da memória
 
-        //atualiza a tela
+        // atualiza a tela
         mainWindow.swapBuffers();
     }
 
