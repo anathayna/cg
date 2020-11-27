@@ -83,10 +83,10 @@ void CreateTriangle() {
         -1.0, 0.0f,  1.0f,         0.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 2 (x,y,z, u,v, nx,ny,nz)
          1.0, 0.0f,  1.0f,        10.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 3 (x,y,z, u,v, nx,ny,nz)
         
-        -1.0, 1.0f, -1.0f,         0.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 4 (x,y,z, u,v, nx,ny,nz)
-         1.0, 1.0f, -1.0f,        10.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 5 (x,y,z, u,v, nx,ny,nz)
-        -1.0, 1.0f,  1.0f,         0.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 6 (x,y,z, u,v, nx,ny,nz)
-         1.0, 1.0f,  1.0f,        10.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 7 (x,y,z, u,v, nx,ny,nz)
+        -1.0, 2.0f, -1.0f,         0.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 4 (x,y,z, u,v, nx,ny,nz)
+         1.0, 2.0f, -1.0f,        10.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 5 (x,y,z, u,v, nx,ny,nz)
+        -1.0, 2.0f,  1.0f,         0.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 6 (x,y,z, u,v, nx,ny,nz)
+         1.0, 2.0f,  1.0f,        10.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 7 (x,y,z, u,v, nx,ny,nz)
     };
 
     unsigned int indices[] = {
@@ -125,15 +125,15 @@ void CreateTriangle() {
     calcAverageNormal(indices, 12, vertices, 32, 8, 5);
 
     mesh* obj1 = new mesh();
-    obj1->CreateMesh(vertices, indices, 32, 12);
+    obj1->CreateMesh(vertices, indices, 64, 36);
     meshList.push_back(obj1);
 
     mesh* obj2 = new mesh();
-    obj2->CreateMesh(vertices, indices, 32, 12);
+    obj2->CreateMesh(vertices, indices, 64, 36);
     meshList.push_back(obj2);
 
     mesh* obj3 = new mesh();
-    obj3->CreateMesh(floorVertices, floorIndices, 32, 6);
+    obj3->CreateMesh(floorVertices, floorIndices, 64, 36);
     meshList.push_back(obj3);
 }
 
@@ -160,19 +160,19 @@ int main() {
                                  0.3f, 0.4f,            // ambient | diffuse
                                  -8.0f, -8.0f, 2.0f);   // x,y,z
 
-    // point light
+    // point light yellow rgb(242, 203, 1)
     unsigned int pointLightCount = 0;
-    pointLights[0] = pointLight(0.0f, 1.0f, 0.0f,     // rgb
+    pointLights[0] = pointLight(0.94f, 0.79f, 0.0f,     // rgb
                                 0.5f, 1.0f,           // ambient | diffuse
                                 -2.0f, 1.0f, -2.0f,   // x,y,z
                                 0.3f, 0.2f, 0.1f);    // const, linear, exp
     pointLightCount++;
-    pointLights[1] = pointLight(0.0f, 0.0f, 1.0f,     // rgb
+    pointLights[1] = pointLight(0.94f, 0.79f, 0.0f,     // rgb
                                 0.5f, 1.0f,           // ambient | diffuse
                                 2.0f, 1.0f, -2.0f,    // x,y,z
                                 0.3f, 0.2f, 0.1f);    // const, linear, exp
     pointLightCount++;
-    pointLights[2] = pointLight(1.0f, 0.0f, 0.0f,     // rgb
+    pointLights[2] = pointLight(0.94f, 0.79f, 0.0f,     // rgb
                                 0.5f, 1.0f,           // ambient | diffuse
                                 0.0f, 1.0f, -2.0f,    // x,y,z
                                 0.3f, 0.2f, 0.1f);    // const, linear, exp
@@ -215,8 +215,8 @@ int main() {
         /********************************
         * cubo
         *********************************/
-        shaderList[0].UseProgram(); // usar o programa
-        glUniformMatrix4fv(shaderList[0].getUniformProjection(), 1, GL_FALSE, glm::value_ptr(projection)); // movimentação da projeção da camera
+        shaderList[0].UseProgram();
+        glUniformMatrix4fv(shaderList[0].getUniformProjection(), 1, GL_FALSE, glm::value_ptr(projection));
         glUniformMatrix4fv(shaderList[0].getUniformView(), 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
         
             /********************************
@@ -232,18 +232,14 @@ int main() {
             /********************************
             * model
             *********************************/
-            glm::mat4 model(1.0f); // cria uma matriz 4x4 e coloca os valores 1.0f em todas as posições
-            model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f)); // traduz o modelo para movimentar a posição (x,y,z)
-            glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
-            brickTexture.useTexture();
-            metalMaterial.useMaterial(shaderList[0].getUniformSpecularIntensity(), shaderList[0].getUniformShininess());
-            meshList[0]->RenderMesh();
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
 
             /********************************
             * cubo
             *********************************/
-            model = glm::mat4(1.0f); // cria uma matriz 4x4 colocando 1.0f em cada uma das posições
-            model = glm::translate(model, glm::vec3(0.0f, 5.0f, -2.5f)); // traduz o modelo para movimentar a posição (x,y,z)
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, glm::vec3(-1.0f, 3.0f, -2.5f));
             glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
             brickTexture.useTexture();
             metalMaterial.useMaterial(shaderList[0].getUniformSpecularIntensity(), shaderList[0].getUniformShininess());
@@ -252,8 +248,8 @@ int main() {
             /********************************
             * chão
             *********************************/
-            model = glm::mat4(1.0f); // cria uma matriz 4x4 colocando 1.0f em cada uma das posições
-            model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f)); // traduz o modelo para movimentar a posição (x,y,z)
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
             glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
             dirtTexture.useTexture();
             woodMaterial.useMaterial(shaderList[0].getUniformSpecularIntensity(), shaderList[0].getUniformShininess());
