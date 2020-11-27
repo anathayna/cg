@@ -204,7 +204,7 @@ int main() {
         /********************************
         * cor de fundo da tela
         *********************************/
-        glClearColor(0.3f, 0.5f, 0.9f, 1.0f); // rgb(93, 147, 253)
+        glClearColor(0.36f, 0.57f, 0.99f, 1.0f); // rgb(93, 147, 253)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         /********************************
