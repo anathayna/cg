@@ -78,38 +78,43 @@ void calcAverageNormal(unsigned int* indices, unsigned int indiceCount,
 
 void CreateTriangle() {
     GLfloat vertices[] = {
-        1.0f,  0.0f, -1.0f,    0.0f,   0.0f,     0.0f, -1.0f, 0.0f,    // vértice 0 (x,y,z, u,v, nx,ny,nz)
-        1.0f,  0.0f,  1.0f,   10.0f,   0.0f,     0.0f, -1.0f, 0.0f,    // vértice 1 (x,y,z, u,v, nx,ny,nz)
-       -1.0f,  0.0f,  1.0f,    0.0f,  10.0f,     0.0f, -1.0f, 0.0f,    // vértice 2 (x,y,z, u,v, nx,ny,nz)
-       -1.0f,  0.0f, -1.0f,   10.0f,  10.0f,     0.0f, -1.0f, 0.0f,    // vértice 3 (x,y,z, u,v, nx,ny,nz)
+        -1.0, 0.0f, -1.0f,         0.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 0 (x,y,z, u,v, nx,ny,nz)
+         1.0, 0.0f, -1.0f,        10.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 1 (x,y,z, u,v, nx,ny,nz)
+        -1.0, 0.0f,  1.0f,         0.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 2 (x,y,z, u,v, nx,ny,nz)
+         1.0, 0.0f,  1.0f,        10.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 3 (x,y,z, u,v, nx,ny,nz)
         
-        1.0f,  1.0f, -1.0f,    0.0f,   0.0f,    0.0f, -1.0f, 0.0f,     // vértice 4 (x,y,z, u,v, nx,ny,nz)
-        1.0f,  1.0f,  1.0f,   10.0f,   0.0f,    0.0f, -1.0f, 0.0f,     // vértice 5 (x,y,z, u,v, nx,ny,nz)
-       -1.0f,  1.0f,  1.0f,    0.0f,  10.0f,    0.0f, -1.0f, 0.0f,     // vértice 6 (x,y,z, u,v, nx,ny,nz)
-       -1.0f,  1.0f, -1.0f,   10.0f,  10.0f,    0.0f, -1.0f, 0.0f      // vértice 7 (x,y,z, u,v, nx,ny,nz)
+        -1.0, 1.0f, -1.0f,         0.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 4 (x,y,z, u,v, nx,ny,nz)
+         1.0, 1.0f, -1.0f,        10.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 5 (x,y,z, u,v, nx,ny,nz)
+        -1.0, 1.0f,  1.0f,         0.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 6 (x,y,z, u,v, nx,ny,nz)
+         1.0, 1.0f,  1.0f,        10.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 7 (x,y,z, u,v, nx,ny,nz)
     };
 
     unsigned int indices[] = {
-        0,1,2,  // primeiro triângulo
-        2,0,3,
-        0,1,5,  // segundo triângulo
-        5,4,0,
-        5,4,7,  // terceiro triângulo
-        7,5,6,
-        0,4,7,  // quarto triângulo
-        7,3,0,
-        7,3,6,  // quinto triângulo
-        6,3,2,
-        2,1,5,  // sexto triângulo
-        5,6,2
+        0,1,2,  // quadrado de cima
+        1,2,3,
+        
+        4,5,6,  // quadrado de baixo
+        5,6,7,
+        
+        3,1,7,  // quadrado da direita
+        1,7,5,
+        
+        0,2,4,  // quadrado da esquerda
+        2,4,6,
+        
+        2,3,6,  // quadrado da frente
+        3,6,7,
+        
+        0,1,4,  // quadrado de trás
+        1,4,5
         
     };
 
     GLfloat floorVertices[] = {
-        -10.0, 0.0f, -10.0f,        0.0f,  0.0f,        0.0f, -1.0f, 0.0f,
-         10.0, 0.0f, -10.0f,        10.0f, 0.0f,        0.0f, -1.0f, 0.0f,
-        -10.0, 0.0f,  10.0f,        0.0f,  10.0f,       0.0f, -1.0f, 0.0f,
-         10.0, 0.0f,  10.0f,        10.0f, 10.0f,       0.0f, -1.0f, 0.0f,
+        -10.0, 0.0f, -10.0f,         0.0f,   0.0f,      0.0f, -1.0f, 0.0f,
+         10.0, 0.0f, -10.0f,        10.0f,   0.0f,      0.0f, -1.0f, 0.0f,
+        -10.0, 0.0f,  10.0f,         0.0f,  10.0f,      0.0f, -1.0f, 0.0f,
+         10.0, 0.0f,  10.0f,        10.0f,  10.0f,      0.0f, -1.0f, 0.0f,
     };
 
     unsigned int floorIndices[] = {
