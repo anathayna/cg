@@ -41,8 +41,8 @@ spotLight spotLights[MAX_SPOT_LIGHTS];
 material metalMaterial;
 material woodMaterial;
 
+texture blockTexture;
 texture brickTexture;
-texture dirtTexture;
 
 GLfloat deltaTime = 0.0f, lastime = 0.0f;
 
@@ -156,41 +156,41 @@ int main() {
     woodMaterial = material(0.3f, 4.0f);
 
     // luz principal
-    mainLight = directionalLight(1.0f, 1.0f, 1.0f,      // rgb
-                                 0.3f, 0.4f,            // ambient | diffuse
-                                 -8.0f, -8.0f, 2.0f);   // x,y,z
+    mainLight = directionalLight(1.0f,  1.0f, 1.0f,     // rgb
+                                 0.3f,  0.4f,           // ambient | diffuse
+                                -8.0f, -8.0f, 2.0f);    // x,y,z
 
     // point light yellow rgb(242, 203, 1)
     unsigned int pointLightCount = 0;
     pointLights[0] = pointLight(0.94f, 0.79f, 0.0f,     // rgb
-                                0.5f, 1.0f,           // ambient | diffuse
-                                -2.0f, 1.0f, -2.0f,   // x,y,z
-                                0.3f, 0.2f, 0.1f);    // const, linear, exp
+                                 0.5f,  1.0f,           // ambient | diffuse
+                                -2.0f,  1.0f, -2.0f,    // x,y,z
+                                 0.3f,  0.2f, 0.1f);    // const, linear, exp
     pointLightCount++;
     pointLights[1] = pointLight(0.94f, 0.79f, 0.0f,     // rgb
-                                0.5f, 1.0f,           // ambient | diffuse
-                                2.0f, 1.0f, -2.0f,    // x,y,z
-                                0.3f, 0.2f, 0.1f);    // const, linear, exp
+                                 0.5f,  1.0f,           // ambient | diffuse
+                                 2.0f,  1.0f, -2.0f,    // x,y,z
+                                 0.3f,  0.2f, 0.1f);    // const, linear, exp
     pointLightCount++;
     pointLights[2] = pointLight(0.94f, 0.79f, 0.0f,     // rgb
-                                0.5f, 1.0f,           // ambient | diffuse
-                                0.0f, 1.0f, -2.0f,    // x,y,z
-                                0.3f, 0.2f, 0.1f);    // const, linear, exp
+                                 0.5f,  1.0f,           // ambient | diffuse
+                                 0.0f,  1.0f, -2.0f,    // x,y,z
+                                 0.3f,  0.2f, 0.1f);    // const, linear, exp
     pointLightCount++;
 
     // spot light
     unsigned int spotLightCount = 0;
-    spotLights[0] = spotLight(1.0f, 1.0f, 1.0f,             // rgb
-                              0.5f, 0.5f,                   // ambient | diffuse
-                              0.0f, 1.0f, 5.0f,             // position (x,y,z)
+    spotLights[0] = spotLight(1.0f,  1.0f, 1.0f,            // rgb
+                              0.5f,  0.5f,                  // ambient | diffuse
+                              0.0f,  1.0f, 5.0f,            // position (x,y,z)
                               0.0f, -1.0f, 0.0f,            // direction (x,y,z)
-                              0.3f, 0.2f, 0.1f, 20.0f);     // const, linear, exp, Edge
+                              0.3f,  0.2f, 0.1f, 20.0f);    // const, linear, exp, Edge
     spotLightCount++;
 
-    brickTexture = texture((char*) ("/Users/anathayna/Documents/docs/senac-bcc/cg/block/block/texture/block.png"));
+    blockTexture = texture((char*) ("/Users/anathayna/Documents/docs/senac-bcc/cg/block/block/texture/block.png"));
+    blockTexture.loadTexture();
+    brickTexture = texture((char*)("/Users/anathayna/Documents/docs/senac-bcc/cg/block/block/texture/brick.png"));
     brickTexture.loadTexture();
-    dirtTexture = texture((char*)("/Users/anathayna/Documents/docs/senac-bcc/cg/block/block/texture/brick.png"));
-    dirtTexture.loadTexture();
 
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
@@ -209,7 +209,7 @@ int main() {
         /********************************
         * cor de fundo da tela
         *********************************/
-        glClearColor(0.36f, 0.57f, 0.99f, 1.0f); // rgb(93, 147, 253)
+        glClearColor(0.36f, 0.57f, 0.99f, 1.0f); // sky rgb(93, 147, 253)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         /********************************
@@ -239,9 +239,9 @@ int main() {
             * cubo
             *********************************/
             model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(-1.0f, 3.0f, -2.5f));
+            model = glm::translate(model, glm::vec3(-1.0f, 3.0f, -1.5f));
             glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
-            brickTexture.useTexture();
+            blockTexture.useTexture();
             metalMaterial.useMaterial(shaderList[0].getUniformSpecularIntensity(), shaderList[0].getUniformShininess());
             meshList[1]->RenderMesh();
 
@@ -251,11 +251,11 @@ int main() {
             model = glm::mat4(1.0f);
             model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
             glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
-            dirtTexture.useTexture();
+            brickTexture.useTexture();
             woodMaterial.useMaterial(shaderList[0].getUniformSpecularIntensity(), shaderList[0].getUniformShininess());
             meshList[2]->RenderMesh();
         
-        glUseProgram(0); //removo da memória
+        glUseProgram(0); // removo da memória
 
         // atualiza a tela
         mainWindow.swapBuffers();
