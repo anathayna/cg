@@ -234,12 +234,16 @@ int main() {
             *********************************/
             glm::mat4 model(1.0f); // cria uma matriz 4x4 e coloca os valores 1.0f em todas as posições
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f)); // traduz o modelo para movimentar a posição (x,y,z)
+            glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
+            brickTexture.useTexture();
+            metalMaterial.useMaterial(shaderList[0].getUniformSpecularIntensity(), shaderList[0].getUniformShininess());
+            meshList[0]->RenderMesh();
 
             /********************************
             * cubo
             *********************************/
             model = glm::mat4(1.0f); // cria uma matriz 4x4 colocando 1.0f em cada uma das posições
-            model = glm::translate(model, glm::vec3(0.0f, 4.0f, -2.5f)); // traduz o modelo para movimentar a posição (x,y,z)
+            model = glm::translate(model, glm::vec3(0.0f, 5.0f, -2.5f)); // traduz o modelo para movimentar a posição (x,y,z)
             glUniformMatrix4fv(shaderList[0].getUniformModel(), 1, GL_FALSE, glm::value_ptr(model));
             brickTexture.useTexture();
             metalMaterial.useMaterial(shaderList[0].getUniformSpecularIntensity(), shaderList[0].getUniformShininess());
