@@ -142,13 +142,11 @@ int main() {
     mainWindow = Window(1366, 768);
     mainWindow.initialize();
 
-    // criar o triangulo
-    CreateTriangle(); // coloca os dados na memória da placa de vídeo
-    CreateShader(); // cria os shaders
+    CreateTriangle();
+    CreateShader();
     
     camera = Camera(glm::vec3 (0.0f, 0.0f, 0.0f), glm::vec3 (0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 5.0f, 8.0f);
     
-    // criando os materiais
     metalMaterial = material(1.0f, 32.0f);
     woodMaterial = material(0.3f, 4.0f);
 
@@ -184,7 +182,6 @@ int main() {
                               0.3f, 0.2f, 0.1f, 20.0f);     // const, linear, exp, Edge
     spotLightCount++;
 
-    // carrega as texturas
     brickTexture = texture((char*) ("/Users/anathayna/Documents/docs/senac-bcc/cg/block/block/texture/block.png"));
     brickTexture.loadTexture();
     dirtTexture = texture((char*)("/Users/anathayna/Documents/docs/senac-bcc/cg/block/block/texture/brick.png"));
@@ -193,7 +190,6 @@ int main() {
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
     while (!mainWindow.getWindowShouldClose()) {
-        // old version of FPS
         GLfloat now = glfwGetTime();
         deltaTime = now - lastime;
         lastime = now;
@@ -208,7 +204,7 @@ int main() {
         /********************************
         * cor de fundo da tela
         *********************************/
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);// limpa a janela
+        glClearColor(0.3f, 0.5f, 0.9f, 1.0f); // rgb(93, 147, 253)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         /********************************
