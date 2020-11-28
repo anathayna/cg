@@ -67,6 +67,9 @@
 		3636D9CF25706055006308C4 /* material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
 		3636D9D025706055006308C4 /* material.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = material.hpp; sourceTree = "<group>"; };
 		3636D9D32570608B006308C4 /* communValues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = communValues.h; sourceTree = "<group>"; };
+		363EB1422571C8C100DAA6FC /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		363EB1432571C8C100DAA6FC /* coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coin.png; sourceTree = "<group>"; };
+		363EB1442571C8C100DAA6FC /* rainbow-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rainbow-star.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +165,9 @@
 			children = (
 				3636D9BD25705E34006308C4 /* block.png */,
 				3636D9BC25705E34006308C4 /* brick.png */,
+				363EB1432571C8C100DAA6FC /* coin.png */,
+				363EB1442571C8C100DAA6FC /* rainbow-star.png */,
+				363EB1422571C8C100DAA6FC /* star.png */,
 				3636D9B725705AA5006308C4 /* texture.cpp */,
 				3636D9B825705AA5006308C4 /* texture.hpp */,
 			);

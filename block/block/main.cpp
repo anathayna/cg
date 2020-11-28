@@ -99,8 +99,8 @@ void CreateTriangle() {
         3,1,7,  // quadrado da direita
         1,7,5,
         
-        0,2,4,  // quadrado da esquerda
-        2,4,6,
+        2,0,6,  // quadrado da esquerda
+        0,6,4,
         
         2,3,6,  // quadrado da frente
         3,6,7,
@@ -122,7 +122,7 @@ void CreateTriangle() {
         1, 2, 3
     };
 
-    calcAverageNormal(indices, 12, vertices, 32, 8, 5);
+    calcAverageNormal(indices, 36, vertices, 64, 8, 5);
 
     mesh* obj1 = new mesh();
     obj1->CreateMesh(vertices, indices, 64, 36);
