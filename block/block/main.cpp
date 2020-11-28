@@ -83,10 +83,10 @@ void CreateTriangle() {
         -1.0, 0.0f,  1.0f,         0.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 2 (x,y,z, u,v, nx,ny,nz)
          1.0, 0.0f,  1.0f,        10.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 3 (x,y,z, u,v, nx,ny,nz)
         
-        -1.0, 2.0f, -1.0f,         0.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 4 (x,y,z, u,v, nx,ny,nz)
-         1.0, 2.0f, -1.0f,        10.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 5 (x,y,z, u,v, nx,ny,nz)
-        -1.0, 2.0f,  1.0f,         0.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 6 (x,y,z, u,v, nx,ny,nz)
-         1.0, 2.0f,  1.0f,        10.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 7 (x,y,z, u,v, nx,ny,nz)
+        -1.0, 2.0f, -1.0f,        10.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 4 (x,y,z, u,v, nx,ny,nz)
+         1.0, 2.0f, -1.0f,         0.0f,  10.0f,      0.0f, -1.0f, 0.0f,    // vértice 5 (x,y,z, u,v, nx,ny,nz)
+        -1.0, 2.0f,  1.0f,        10.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 6 (x,y,z, u,v, nx,ny,nz)
+         1.0, 2.0f,  1.0f,         0.0f,   0.0f,      0.0f, -1.0f, 0.0f,    // vértice 7 (x,y,z, u,v, nx,ny,nz)
     };
 
     unsigned int indices[] = {
